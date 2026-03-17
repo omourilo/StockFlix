@@ -11,6 +11,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+/**
+ * Entidade que representa um usuario do sistema.
+ * 
+ * <p>Responsável por armazenar as informações de autenticação
+ * e controle de acesso	.</p>
+ * 
+ * 
+ */
 @Entity
 @Getter
 @Setter
@@ -29,7 +38,10 @@ public class Usuario {
 	
 	/**
 	 * parametro para decidir nivel de acesso do usuario, 
-	 * true para acesso ADM e false para acesso comum
+	 * <p> 
+	 * true para acesso de administrador;<br>
+	 * false para acesso comum.
+	 * </p>
 	 */
 	@Column(nullable = false)
 	private Boolean acessoADM;

@@ -14,6 +14,6 @@ import com.stockFlix.Models.Usuario;
  * @see JpaRepository
  */
 @Repository
-public interface UserRepository extends JpaRepository<Usuario, Long>{
+public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
 }
