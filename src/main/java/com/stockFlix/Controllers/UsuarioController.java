@@ -2,7 +2,6 @@ package com.stockFlix.Controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,30 +18,57 @@ import com.stockFlix.Services.UsuarioService;
 /**
  * Contralador para mapeamento dos endpoints do usuario.
  * 
- * <p>Expõe os endPoints do usuario para conexão com o frontEnd</p>
+ * <p>Expõe os endPoints do usuario	permitindo que o front realize HTTP Requests.</p>
  */
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
 	
-	@Autowired
-	UsuarioService usuarioService;
+	private final UsuarioService usuarioService;
+
+	public UsuarioController(UsuarioService usuarioService) {
+	    this.usuarioService = usuarioService;
+	}
 	
+    /**
+     * Retorna todos os usuários cadastrados.
+     *
+     * @return lista de {@code UsuarioDTO}
+     */
 	@GetMapping
 	public List<UsuarioDTO> getAllUsuarios(){
 		return usuarioService.readAllUsuarios();
 	}
 	
+    /**
+     * Busca um usuário pelo ID.
+     *
+     * @param id identificador do usuário
+     * @return {@code UsuarioDTO} correspondente ao usuário encontrado
+     */
 	@GetMapping("/{id}")
 	public UsuarioDTO getUsuarioById(@PathVariable Long id) {
 		return usuarioService.findById(id);
 	}
 	
+    /**
+     * Cria um novo usuário.
+     *
+     * @param usuarioDTO dados do usuário a ser criado
+     * @return {@code UsuarioDTO} contendo os dados persistidos
+     */
 	@PostMapping
 	public UsuarioDTO createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
 		return usuarioService.createUsuario(usuarioDTO);
 	}
 	
+    /**
+     * Atualiza um usuário existente.
+     *
+     * @param id identificador do usuário
+     * @param usuarioDTO dados atualizados do usuário
+     * @return {@code UsuarioDTO} com os dados atualizados
+     */
 	@PutMapping("/{id}")
 	public UsuarioDTO updateUsuario(
 			@PathVariable Long id,
@@ -50,6 +76,11 @@ public class UsuarioController {
 		return usuarioService.updateUsuario(id, usuarioDTO);
 	}
 	
+    /**
+     * Remove um usuário pelo ID.
+     *
+     * @param id identificador do usuário
+     */
 	@DeleteMapping("/{id}")
 	public void deleteUsuario(@PathVariable Long id) {
 		usuarioService.deleteUsuario(id);
