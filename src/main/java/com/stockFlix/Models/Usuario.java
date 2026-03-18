@@ -1,5 +1,7 @@
 package com.stockFlix.Models;
 
+import com.stockFlix.DTOs.UsuarioDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,7 +19,6 @@ import lombok.Setter;
  * 
  * <p>Responsável por armazenar as informações de autenticação
  * e controle de acesso	.</p>
- * 
  * 
  */
 @Entity
@@ -46,6 +47,11 @@ public class Usuario {
 	@Column(nullable = false)
 	private Boolean acessoADM;
 	
-	
+	public Usuario(UsuarioDTO usuarioDTO) {
+		this.id = usuarioDTO.id();
+		this.login = usuarioDTO.login();
+		this.senha = usuarioDTO.senha();
+		this.acessoADM = usuarioDTO.acessoADM();
+	}
 
 }

@@ -4,9 +4,9 @@ package com.stockFlix.Excecoes;
 /**
  * Classe para lançamento de exceção para busca sem resultado.
  * 
- * Caso alguma busca no banco não encontre resultado, 
+ * <p>Caso alguma busca no banco não encontre resultado, 
  * temos essa exceção específica. 
- * Facilitando o tratamento de erros e o teste unitario.
+ * Facilitando o tratamento de erros e o teste unitario.</p>
  */
 public class NotFoundException extends RuntimeException{
 
