@@ -48,7 +48,6 @@ public class Usuario {
 	private Boolean acessoADM;
 	
 	public Usuario(UsuarioDTO usuarioDTO) {
-		this.id = usuarioDTO.id();
 		this.login = usuarioDTO.login();
 		this.senha = usuarioDTO.senha();
 		this.acessoADM = usuarioDTO.acessoADM();
