@@ -51,6 +51,7 @@ public class UsuarioService {
 	}
 	
 	
+	
 	/**
 	 * Método para a atualização do usuario no banco de dados.
 	 * 
