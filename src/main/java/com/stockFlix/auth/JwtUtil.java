@@ -32,12 +32,16 @@ public class JwtUtil {
         return getClaims(token).getSubject();
     }
 
+    public String extrairTipo(String token) {
+        return getClaims(token).get("role", String.class);
+    }
+
     public boolean validarToken(String token, String email) {
         String emailDoToken = extrairEmail(token);
         return emailDoToken.equals(email) && !tokenExpirado(token);
     }
 
-    public boolean tokenExpirado(String token) { 
+    private boolean tokenExpirado(String token) { 
         return getClaims(token).getExpiration().before(new Date());
     }
 
