@@ -1,13 +1,10 @@
-package com.stockFlix.Services;
+package com.stockFlix.usuario;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.stockFlix.DTOs.UsuarioDTO;
-import com.stockFlix.Excecoes.NotFoundException;
-import com.stockFlix.Models.Usuario;
-import com.stockFlix.Repositories.UsuarioRepository;
+import com.stockFlix.excecoes.NotFoundException;
 
 import jakarta.transaction.Transactional;
 

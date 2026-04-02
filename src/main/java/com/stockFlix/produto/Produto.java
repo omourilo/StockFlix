@@ -1,4 +1,6 @@
-package com.stockFlix.Models;
+package com.stockFlix.produto;
+
+import com.stockFlix.setor.Setor;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

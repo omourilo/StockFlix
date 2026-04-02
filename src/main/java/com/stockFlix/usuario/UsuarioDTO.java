@@ -1,6 +1,5 @@
-package com.stockFlix.DTOs;
+package com.stockFlix.usuario;
 
-import com.stockFlix.Models.Usuario;
 
 
 /**

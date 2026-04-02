@@ -1,7 +1,10 @@
-package com.stockFlix.Models;
+package com.stockFlix.setor;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.stockFlix.estoque.Estoque;
+import com.stockFlix.produto.Produto;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,11 +12,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -21,18 +26,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "estoques")
-public class Estoque {
-
+@Table(name = "setores")
+public class Setor {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long Id;
 	
 	@Column(nullable = false)
 	private String nome;
+	
+	@OneToMany(mappedBy = "setor", cascade = CascadeType.ALL)
+	List<Produto> produtos = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(name = "estoque_id")
+	private Estoque estoque;
+	
 
-	@OneToMany(mappedBy = "estoque" , cascade = CascadeType.ALL)
-	List<Setor> setores = new ArrayList<>();
-	
-	
 }

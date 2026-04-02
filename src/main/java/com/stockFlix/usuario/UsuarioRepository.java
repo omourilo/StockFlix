@@ -1,11 +1,10 @@
-package com.stockFlix.Repositories;
+package com.stockFlix.usuario;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.stockFlix.Models.Usuario;
 
 /**
  * Repositório responsável pela interação com o banco de dados.

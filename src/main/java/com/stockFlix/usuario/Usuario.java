@@ -1,6 +1,5 @@
-package com.stockFlix.Models;
+package com.stockFlix.usuario;
 
-import com.stockFlix.DTOs.UsuarioDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

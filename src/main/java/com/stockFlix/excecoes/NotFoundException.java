@@ -1,4 +1,4 @@
-package com.stockFlix.Excecoes;
+package com.stockFlix.excecoes;
 
 
 /**
