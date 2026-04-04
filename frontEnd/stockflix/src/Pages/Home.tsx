@@ -8,9 +8,14 @@ function Home() {
 
   return (
     <>
+      <div className="flex flex-col min-h-screen">
        <Header/>
        <Sidebar/>
+       <main className='h-full flex-1'>
+        a
+       </main>
        <Footer/>
+      </div>
     </>
   )
 }
