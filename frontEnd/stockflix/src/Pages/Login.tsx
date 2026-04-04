@@ -5,24 +5,9 @@ function Login() {
   return (
     <>
        <section className="w-screen h-screen flex">
-            <section className="h-screen bg-blue-800 w-1/2">
-                <div className="relative h-full w-full bg-slate-950 overflow-hidden">
-                    <div className="p-8">
-                        <h2 className="text-zinc-50 text-8xl font-bold">StockFlix</h2>
-                        <p className="pt-5 text-xl text-zinc-500">sdadasdsadasf</p>
-                    </div>
-                    <div className="absolute -top-[10%] -left-[10%] h-120 w-150 rounded-full bg-[radial-gradient(circle_at_center,rgba(30,58,138,0.3),transparent_70%)] blur-[80px]">
-                    </div>
-
-                    <div className="absolute -bottom-[20%] -right-[10%] h-125 w-125 rounded-full bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.1),transparent_70%)] blur-[100px]">
-                    </div>
-
-                    <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
-                    </div>
-                    </div>
-            </section>
-            <section className="h-screen w-1/2 flex justify-center items-center bg-white">
-  <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl border border-slate-200">
+  
+            <section className="h-screen w-full p-4 flex justify-center items-center">
+  <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-2xl border border-slate-400">
     
 
     <div className="text-center flex items-center justify-center flex-col transition space-y-2">
@@ -34,7 +19,7 @@ function Login() {
     <form className="space-y-6">
       <div className="space-y-1">
         <label className="text-sm font-medium text-slate-700 ml-1">Usuário</label>
-        <input type="text" placeholder="ex: eduardo.estoque" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400"/>
+        <input type="text" placeholder="ex: eduardo.estoque" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 placeholder:text-slate-400"/>
       </div>
 
       <div className="space-y-1">
