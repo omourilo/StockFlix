@@ -1,37 +1,42 @@
 import { LayoutDashboard, FileText, Tags, Settings, LogOut } from 'lucide-react';
+import { Link } from 'react-router-dom'
 
-const Sidebar = () => {
-  const menuItems = [
-    { icon: <LayoutDashboard size={20} />, label: 'Dashboard' },
-    { icon: <FileText size={20} />, label: 'Posts' },
-    { icon: <Tags size={20} />, label: 'Categories' },
-    { icon: <Settings size={20} />, label: 'Settings' },
-  ];
+interface SidebarProps {
+  isOpen: boolean;
+}
+
+const Sidebar = ( { isOpen }: SidebarProps) => {
 
   return (
-    <aside className="h-full w-64 bg-(--sideBarBackground) text-gray-100 flex flex-col border-r border-white/10 absolute top-0">
+    <aside className={`h-full w-64 bg-(--sideBarBackground) text-gray-100 flex flex-col border-r transition-all duration-400 border-white/10 absolute top-0 ${isOpen ? "w-64": "w-0 -translate-x-full"} z-60`}>
       {/* <div className="p-6 text-xl font-bold border-b border-white/10">
         Stock<span className="text-blue-500">Flix</span>
       </div> */}
     
-
-  {/* Área de Navegação com Scroll Interno */}
   <nav className="flex-1 p-4 mt-18 overflow-y-auto custom-scrollbar">
     <ul className="space-y-2">
-      {menuItems.map((item, index) => (
-        <li key={index}>
-          <a href="#" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
-            <span className="text-gray-400 group-hover:text-blue-400">
-              {item.icon}
-            </span>
-            <span className="font-medium">{item.label}</span>
-          </a>
-        </li>
-      ))}
+      <li>
+        <Link to="/" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
+          <span className="text-gray-400 group-hover:text-blue-400"><LayoutDashboard size={20}/></span>
+          <span className="font-medium">Home</span>
+        </Link>
+        <Link to="/" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
+          <span className="text-gray-400 group-hover:text-blue-400"><FileText size={20} /></span>
+          <span className="font-medium">Dashboard</span>
+        </Link>
+        <Link to="/Movement" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
+          <span className="text-gray-400 group-hover:text-blue-400"><Tags size={20} /></span>
+          <span className="font-medium">Movement</span>
+        </Link>
+        <Link to="/History" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
+          <span className="text-gray-400 group-hover:text-blue-400"><Settings size={20} /></span>
+          <span className="font-medium">History</span>
+        </Link>
+      </li>
     </ul>
   </nav>
 
-  {/* Botão de Sair SEMPRE no rodapé */}
+
   <div className="p-4 border-t border-white/10 bg-(--sideBarBackground)">
     <button className="flex items-center gap-3 p-3 w-full rounded-lg hover:bg-red-500/10 hover:text-red-500 transition-colors cursor-pointer">
       <LogOut size={20} />

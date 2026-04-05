@@ -2,6 +2,7 @@ import Header from '../components/Header.tsx'
 import Sidebar from '../components/Sidebar.tsx'
 import Footer from '../components/Footer.tsx'
 import { Search } from 'lucide-react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 
@@ -19,13 +20,15 @@ function Home() {
     { id: 103, nome: "Fone Bluetooth", preco: "R$ 290,00", quantidade: 42 },
   ];
 
+  const [sidebarOpen, setsidebarOpen] = useState(true)
+
   return (
     <>
       <div className="flex flex-col min-h-screen">
-       <Header/>
-       <Sidebar/>
+       <Header onMenuClick={() => setsidebarOpen(!sidebarOpen)}/>
+       <Sidebar isOpen={sidebarOpen} />
        <main className='h-full flex-1'>
-          <section className='ml-64 p-6'>
+          <section className={`${sidebarOpen ? 'md:ml-64': 'md:ml-0'} transition-all duration-300 p-6`}>
 
             <div className="flex flex-col gap-6 ">
 
@@ -36,18 +39,19 @@ function Home() {
                 </span>
               </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  <div className="relative flex-1 max-w-sm">
-                    <button className='absolute right-0 top-1/2 -translate-y-1/2 flex w-10 items-center justify-center cursor-pointer h-full'>
-                      <Search size={20}/>
+                <div className="flex flex-col sm:flex-row sm:justify-between gap-4 w-full">
+                  <div className="relative w-full max-w-sm group">
+                    <input type="text" placeholder="Buscar item ou código..." className="relative w-full pl-4 pr-12 py-2 bg-white border z-0 border-(--borderColor) rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500  placeholder:text-gray-400 text-gray-700"/>
+                    
+                    <button type="button" className="absolute right-0 top-0 h-full w-11 flex items-center border-l border-(--borderColor) justify-center text-gray-400  cursor-pointer">
+                      <Search size={18} strokeWidth={2.5} />
                     </button>
-                    <input type="text" placeholder="Buscar item ou código..." className="w-full relative pl-4 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"/>
                   </div>
                   
-                  <button className="flex items-center gap-2 bg-green-600 cursor-pointer hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg ">
-                    <span className="text-lg">+</span>
+                  <Link to={'/Create'} className="flex items-center w-50 md:w-auto gap-2 bg-green-600 cursor-pointer hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg ">
+                    <span className="text-sm lg:text-lg">+</span>
                     Adicionar produto
-                  </button>
+                  </Link>
                 </div>
               </div>
             <div>
