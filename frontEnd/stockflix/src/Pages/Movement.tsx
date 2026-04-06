@@ -2,9 +2,22 @@ import Header from '../components/Header.tsx'
 import Sidebar from '../components/Sidebar.tsx'
 import Footer from '../components/Footer.tsx'
 import {useState} from 'react'
+import { AlertTriangle, Package, TrendingUp, BarChart3, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+
+interface InventoryItem {
+  id: string;
+  name: string;
+  category: string;
+  quantity: number;
+  minThreshold: number;
+  status: 'Normal' | 'Baixo' | 'Crítico';
+}
+
+
 
 function Movement() {
 const [sidebarOpen, setsidebarOpen] = useState(true)
+
   return (
     <>
     <div className="flex flex-col min-h-screen">
@@ -13,7 +26,7 @@ const [sidebarOpen, setsidebarOpen] = useState(true)
       <Sidebar isOpen={sidebarOpen}/>
       <main className='h-full flex-1'>
           <section className={`${sidebarOpen ? 'ml-64': 'ml-0'} transition-all duration-300 p-6`}>
-            
+            <h1 className="text-3xl font-bold">Movimentação</h1>
           </section>
       </main>
       <Footer/>

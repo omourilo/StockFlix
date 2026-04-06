@@ -13,7 +13,7 @@ function Create() {
       <Sidebar isOpen={sidebarOpen}/>
       <main className='h-full flex-1'>
           <section className={`${sidebarOpen ? 'ml-64': 'ml-0'} transition-all duration-300 p-6`}>
-            <h2> Create </h2>
+              <h1 className="text-3xl font-bold text-gray-800 tracking-tight">Create</h1>
           </section>
       </main>
       <Footer/>

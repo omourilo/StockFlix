@@ -8,7 +8,7 @@ interface SidebarProps {
 const Sidebar = ( { isOpen }: SidebarProps) => {
 
   return (
-    <aside className={`h-full w-64 bg-(--sideBarBackground) text-gray-100 flex flex-col border-r transition-all duration-400 border-white/10 absolute top-0 ${isOpen ? "w-64": "w-0 -translate-x-full"} z-60`}>
+    <aside className={`h-full w-64 bg-(--sideBarBackground) fixed text-gray-100 flex flex-col border-r transition-all duration-400 border-white/10 top-0 ${isOpen ? "w-64": "w-0 -translate-x-full"} z-60`}>
       {/* <div className="p-6 text-xl font-bold border-b border-white/10">
         Stock<span className="text-blue-500">Flix</span>
       </div> */}

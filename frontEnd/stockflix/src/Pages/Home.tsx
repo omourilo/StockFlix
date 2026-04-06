@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar.tsx'
 import Footer from '../components/Footer.tsx'
 import { Search } from 'lucide-react'
 import { useState } from 'react'
+import { produtos } from '../data/constants.ts';
 import { Link } from 'react-router-dom'
 
 
@@ -14,11 +15,7 @@ function Home() {
     quantidade:number;
   }
 
-  const produtos: Produto[] = [
-    { id: 101, nome: "Smartphone Galaxy", preco: "R$ 2.500,00", quantidade: 15 },
-    { id: 102, nome: "Notebook Pro", preco: "R$ 5.800,00", quantidade: 8 },
-    { id: 103, nome: "Fone Bluetooth", preco: "R$ 290,00", quantidade: 42 },
-  ];
+
 
   const [sidebarOpen, setsidebarOpen] = useState(true)
 
@@ -68,7 +65,7 @@ function Home() {
                       </thead>
 
                       <tbody className="divide-y divide-gray-200">
-                        {produtos.map((item) => (
+                        {produtos.map((item: Produto) => (
                           <tr key={item.id} className="hover:bg-gray-50 transition-colors">
                             <td className="px-4 py-3 font-medium text-gray-900">{item.nome}</td>
                             <td className="px-4 py-3 text-gray-700">{item.id}</td>
