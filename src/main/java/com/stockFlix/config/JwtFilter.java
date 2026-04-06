@@ -3,6 +3,7 @@ package com.stockFlix.config;
 
 import java.io.IOException;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.stockFlix.auth.JwtUtil;
