@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom"
 import Header from '../components/Header.tsx'
 import Sidebar from '../components/Sidebar.tsx'
 import Footer from '../components/Footer.tsx'
+import Movement from '../components/Movement.tsx'
 import {useState} from 'react'
-import { produtos } from '../data/constants.ts';
+import { produtos } from '../data/constants.ts'
 
 const ProductDetail = () =>{
     const { id } = useParams<{ id: string}>();
@@ -11,9 +12,15 @@ const ProductDetail = () =>{
     const [sidebarOpen, setsidebarOpen] = useState(true)
     if (!produto) {
     return (
-      <div className={`${sidebarOpen ? 'ml-64' : 'ml-0'} p-6 text-red-500`}>
-        Produto não carregado. Volte à listagem.
-      </div>
+      <>
+      <Header onMenuClick={() => setsidebarOpen(!sidebarOpen)}/>
+      <Sidebar isOpen={sidebarOpen}/>
+      <main className='h-full flex-1'>
+        <section className={`${sidebarOpen ? 'ml-64': 'ml-0'} transition-all duration-300 p-6`}>
+            <h2> ERRO </h2>
+        </section>  
+      </main>
+      </>
     );
   }
     return(
@@ -41,25 +48,28 @@ const ProductDetail = () =>{
                                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore officiis eveniet at animi odit quo sed veniam, voluptas molestiae voluptatem dolorum hic veritatis sit similique, iure consequatur accusantium numquam rem.
                                 </p>
                                 <section className="font-serif ">
-                                    <div className="border-y flex justify-between border-(--borderColor) py-2 px-4">
+                                    <div className="border-y flex font-medium justify-between border-(--borderColor) py-2 px-4">
                                         <p>estoque mínimo</p>
                                         <p>1</p>
                                     </div>
-                                    <div className="border-b flex justify-between border-(--borderColor) py-2 px-4">
+                                    <div className="border-b flex font-medium justify-between border-(--borderColor) py-2 px-4">
                                         <p>estoque máximo</p>
                                         <p>1</p>
                                     </div>
-                                    <div className="border-b flex justify-between border-(--borderColor) py-2 px-4">
+                                    <div className="border-b flex font-medium justify-between border-(--borderColor) py-2 px-4">
                                         <p>valor unitário</p>
                                         <p>1</p>
                                     </div>
-                                    <div className="border-b flex justify-between border-(--borderColor) py-2 px-4">
+                                    <div className="border-b flex font-medium justify-between border-(--borderColor) py-2 px-4">
                                         <p>valor em estoque</p>
                                         <p>1</p>
                                     </div>
                                 </section>
                             </section>
-                            <section className="border-t border-(--borderColor) flex items-center justify-center p-8">
+                            <section className="border-t border-(--borderColor) p-8 ">
+                                <Movement/>
+                            </section>
+                            <section className="border-t border-(--borderColor) flex items-center justify-center p-6">
                                 <button className="p-2 border border-zinc-400 cursor-pointer rounded-md">editar</button>
                             </section>
 
