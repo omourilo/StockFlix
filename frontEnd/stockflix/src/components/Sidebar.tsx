@@ -1,4 +1,4 @@
-import { LayoutDashboard, FileText, Tags, Settings, LogOut } from 'lucide-react';
+import { Home, LayoutDashboard, History, LogOut } from 'lucide-react';
 import { Link } from 'react-router-dom'
 
 interface SidebarProps {
@@ -17,20 +17,16 @@ const Sidebar = ( { isOpen }: SidebarProps) => {
     <ul className="space-y-2">
       <li>
         <Link to="/" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
-          <span className="text-gray-400 group-hover:text-blue-400"><LayoutDashboard size={20}/></span>
+          <span className="text-gray-400 group-hover:text-blue-400"><Home size={20}/></span>
           <span className="font-medium">Home</span>
         </Link>
-        <Link to="/" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
-          <span className="text-gray-400 group-hover:text-blue-400"><FileText size={20} /></span>
+        <Link to="/Dashboard" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
+          <span className="text-gray-400 group-hover:text-blue-400"><LayoutDashboard size={20} /></span>
           <span className="font-medium">Dashboard</span>
         </Link>
-        <Link to="/Movement" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
-          <span className="text-gray-400 group-hover:text-blue-400"><Tags size={20} /></span>
-          <span className="font-medium">Movement</span>
-        </Link>
         <Link to="/History" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
-          <span className="text-gray-400 group-hover:text-blue-400"><Settings size={20} /></span>
-          <span className="font-medium">History</span>
+          <span className="text-gray-400 group-hover:text-blue-400"><History size={20} /></span>
+          <span className="font-medium">Histórico</span>
         </Link>
       </li>
     </ul>

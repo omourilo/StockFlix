@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar.tsx'
 import Footer from '../components/Footer.tsx'
 import {useState} from 'react'
 
-function Error() {
+function Dashboard() {
   const [sidebarOpen, setsidebarOpen] = useState(true)
   return (
     <>
@@ -13,7 +13,7 @@ function Error() {
       <Sidebar isOpen={sidebarOpen}/>
       <main className='h-full flex-1'>
           <section className={`${sidebarOpen ? 'ml-64': 'ml-0'} transition-all duration-300 p-6`}>
-            <h2> Pagina de erro </h2>
+            <h2> Dashboard </h2>
           </section>
       </main>
       <Footer/>
@@ -22,4 +22,4 @@ function Error() {
   )
 }
 
-export default Error
+export default Dashboard

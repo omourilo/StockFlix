@@ -26,7 +26,7 @@ function Movement({produtoAtual, onUpdate }: MovementProps){
         if (novoEstoque < 0) return alert("Estoque insuficiente!");
 
         onUpdate(novoEstoque);
-        alert(`Sucesso!`);
+        alert(`A operação foi concluída com sucesso!`);
     };
 
     return(

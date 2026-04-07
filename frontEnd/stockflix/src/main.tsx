@@ -9,6 +9,7 @@ import Home from  './Pages/Home.tsx'
 import Error from  './Pages/Error.tsx'
 import Create from './Pages/Create.tsx'
 import History from './Pages/History.tsx'
+import Dashboard from './Pages/Dashboard.tsx'
 import ProductDetail from './Pages/ProductDetail.tsx'
 
 
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path:"/:id",
     element:<ProductDetail/>
+  },
+  {
+    path:"/Dashboard",
+    element:<Dashboard/>
   }
 ])
 

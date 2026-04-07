@@ -72,7 +72,7 @@ const ProductDetail = () =>{
                                     </div>
                                     <div className="border-b flex font-medium justify-between border-(--borderColor) py-2 px-4">
                                         <p>valor unitário</p>
-                                        <p>1</p>
+                                        <p>{produto.preco}</p>
                                     </div>
                                     <div className="border-b flex font-medium justify-between border-(--borderColor) py-2 px-4">
                                         <p>valor em estoque</p>
