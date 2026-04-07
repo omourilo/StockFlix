@@ -90,17 +90,12 @@
 			<version>0.12.5</version>
 			<scope>runtime</scope>
 		</dependency>
-		
-		<dependency>
-    		<groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
 
 		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-security</artifactId>
-		    <version>4.0.5</version>
+		    <version>4.0.5</version><!--$NO-MVN-MAN-VER$-->
 		    <scope>compile</scope>
 		</dependency>
 
