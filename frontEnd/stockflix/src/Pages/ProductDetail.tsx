@@ -3,13 +3,19 @@ import Header from '../components/Header.tsx'
 import Sidebar from '../components/Sidebar.tsx'
 import Footer from '../components/Footer.tsx'
 import Movement from '../components/Movement.tsx'
-import {useState} from 'react'
-import { produtos } from '../data/constants.ts'
+import { useState } from 'react'
+import { produtos, type Produto } from '../data/constants.ts'
 
 const ProductDetail = () =>{
     const { id } = useParams<{ id: string}>();
-    const produto = produtos.find(p => p.id === Number(id));
-    const [sidebarOpen, setsidebarOpen] = useState(true)
+    const [sidebarOpen, setsidebarOpen] = useState(true);
+
+    const [produto, setProduto] = useState<Produto | undefined>(() => 
+        produtos.find(p => p.id === Number(id))
+    );
+    const [quantidade,setQuantidade] = useState(1);
+    const [tipo,setTipo] = useState <'entrada' | 'saida'>("entrada");
+
     if (!produto) {
     return (
       <>
@@ -23,6 +29,14 @@ const ProductDetail = () =>{
       </>
     );
   }
+
+    const atualizarEstoquePai = (novaQuantidade: number) => {
+            if (produto) {
+                setProduto({ ...produto, quantidade: novaQuantidade });
+            }
+        };
+
+
     return(
         <> 
         <div className="flex flex-col min-h-screen">
@@ -67,7 +81,7 @@ const ProductDetail = () =>{
                                 </section>
                             </section>
                             <section className="border-t border-(--borderColor) p-8 ">
-                                <Movement/>
+                                <Movement produtoAtual={produto} onUpdate={atualizarEstoquePai}/>
                             </section>
                             <section className="border-t border-(--borderColor) flex items-center justify-center p-6">
                                 <button className="p-2 border border-zinc-400 cursor-pointer rounded-md">editar</button>
