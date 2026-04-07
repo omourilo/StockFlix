@@ -9,7 +9,6 @@ import Home from  './Pages/Home.tsx'
 import Error from  './Pages/Error.tsx'
 import Create from './Pages/Create.tsx'
 import History from './Pages/History.tsx'
-import Movement from './Pages/Movement.tsx'
 import ProductDetail from './Pages/ProductDetail.tsx'
 
 
@@ -25,10 +24,6 @@ const router = createBrowserRouter([
   {
     path:"/History",
     element:<History/>
-  },
-  {
-    path:"/Movement",
-    element:<Movement/>
   },
   {
     path:"/",

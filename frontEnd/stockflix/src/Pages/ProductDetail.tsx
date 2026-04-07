@@ -13,8 +13,8 @@ const ProductDetail = () =>{
     const [produto, setProduto] = useState<Produto | undefined>(() => 
         produtos.find(p => p.id === Number(id))
     );
-    const [quantidade,setQuantidade] = useState(1);
-    const [tipo,setTipo] = useState <'entrada' | 'saida'>("entrada");
+
+    
 
     if (!produto) {
     return (
