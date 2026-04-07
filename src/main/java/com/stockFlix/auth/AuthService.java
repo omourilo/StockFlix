@@ -1,10 +1,15 @@
 package com.stockFlix.auth;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import com.stockFlix.usuario.UsuarioRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class AuthService {
     
     private final UsuarioRepository usuarioRepository;
@@ -13,16 +18,26 @@ public class AuthService {
 
     public String login(LoginDTO loginDTO) {
 
-        String login = loginDTO.login();
-        String senha = loginDTO.senha();
 
         try {
             authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(login, senha)
+                    new UsernamePasswordAuthenticationToken(loginDTO.login(), loginDTO.senha())
                 );
         } catch (Exception e) {
-            System.out.println(e);
+            throw new RuntimeException("Credenciais invalidas", e);
         }
+        
+        var usuario = usuarioRepository.findbyEmail(loginDTO.login());
+        
+        if(usuario == null) {
+        	throw new RuntimeException("Usuario não encontrado.");
+        }
+        
+        String role = usuario.getAcessoADM()? "ADMIN" : "COMUM";
+        
+        String token = jwtUtil.gerarToken(loginDTO.login(), role);
+        
+        return token;
     }
     
 }
