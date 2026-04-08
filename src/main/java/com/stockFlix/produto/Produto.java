@@ -48,5 +48,8 @@ public class Produto {
 	@JoinColumn(name = "setor_id")
 	private Setor setor;
 	
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+	List<Movimentacao> movimentacoes = new ArrayList<>();
+
 	
 }
