@@ -29,14 +29,9 @@ public class AuthService {
             throw new RuntimeException("Credenciais invalidas", e);
         }
         
-        var usuario = usuarioRepository.findbyEmail(loginDTO.login());
-        
-        if(usuario == null) {
-        	throw new RuntimeException("Usuario não encontrado.");
-        }
-        
-        String role = usuario.getAcessoADM()? "ADMIN" : "COMUM";
-        
+        String role = (usuarioRepository.findByEmail(loginDTO.login())
+        				.orElseThrow(() ->  new RuntimeException("Usuario não encontrado.")).getAcessoADM())? "ADMIN" : "COMUM";
+    
         String token = jwtUtil.gerarToken(loginDTO.login(), role);
         
         return token;

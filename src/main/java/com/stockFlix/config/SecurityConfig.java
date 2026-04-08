@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,12 +37,16 @@ public class SecurityConfig {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         
         .authorizeHttpRequests(auth -> auth
+        	.requestMatchers("/auth/login").permitAll()
             .requestMatchers(HttpMethod.POST, "/usuarios").hasRole("ADMIN")
             .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasRole("ADMIN")
             .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
             .requestMatchers(HttpMethod.GET, "/usuarios/**").authenticated()) //Só vou colocar as rotas exclusivas do ADMIM, o resto vai ficar authenticated, para o admim conseguir acessar as rotas tbm
         
+        .authenticationProvider(authenticationProvider())
+        
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+        
         .build();
     }
 
@@ -52,5 +58,15 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
         return authenticationConfiguration.getAuthenticationManager();
+    }
+    
+    @Bean
+    public AuthenticationProvider authenticationProvider() throws Exception {
+    	
+    	DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
+    	
+    	authProvider.setPasswordEncoder(passwordEncoder());
+    	
+    	return authProvider;	
     }
 }

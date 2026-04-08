@@ -1,6 +1,15 @@
 package com.stockFlix.usuario;
 
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.jspecify.annotations.Nullable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +36,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario implements UserDetails{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,5 +62,26 @@ public class Usuario {
 		this.senha = usuarioDTO.senha();
 		this.acessoADM = usuarioDTO.acessoADM();
 	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority(this.acessoADM ? "ROLE_ADMIN" : "ROLE_COMUM"));
+		return authorities;
+	}
+
+	@Override
+	public @Nullable String getPassword() {
+		String senha = getSenha();
+		return senha;
+	}
+
+	@Override
+	public String getUsername() {
+		String login = getLogin();
+		return login;
+	}
+	
+	
 
 }
