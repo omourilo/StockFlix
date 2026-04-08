@@ -27,7 +27,9 @@ public class AuthController {
 	 * @return ResponseEntity resposta da requisição, é esperado resposta 200
 	 */
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
-		return ResponseEntity.ok(authService.login(loginDTO));
+	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {
+
+		authService.login(loginDTO, response);
+		return ResponseEntity.ok("Login realizado com sucesso!");
 	}
 }

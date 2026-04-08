@@ -3,6 +3,9 @@ package com.stockFlix.auth;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseCookie;
+
 
 import com.stockFlix.usuario.UsuarioRepository;
 
@@ -18,7 +21,7 @@ public class AuthService {
 
     
     
-    public String login(LoginDTO loginDTO) {
+    public String login(LoginDTO loginDTO, HttpServletResponse response) {
 
 
         try {
@@ -33,6 +36,13 @@ public class AuthService {
         				.orElseThrow(() ->  new RuntimeException("Usuario não encontrado.")).getAcessoADM())? "ADMIN" : "COMUM";
     
         String token = jwtUtil.gerarToken(loginDTO.login(), role);
+
+        ResponseCookie cookie = ResponseCookie.from("jwt", token)
+                                        .httpOnly(true)
+                                        .path("/")
+                                        .build();
+        
+        response.addHeader("Set-Cookie", cookie.toString());
         
         return token;
     }
