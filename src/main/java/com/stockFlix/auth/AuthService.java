@@ -11,6 +11,12 @@ import com.stockFlix.usuario.UsuarioRepository;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Serviço responsável pelo processo de autenticação de usuários.
+ * 
+ * <p>Realiza a validação das credenciais, geração do token JWT
+ * e envio do token via cookie na resposta HTTP.</p>
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -20,7 +26,22 @@ public class AuthService {
     private final JwtUtil jwtUtil;
 
     
-    
+    /**
+     * Realiza o login do usuário.
+     * 
+     * <p>Fluxo:</p>
+     * <ol>
+     *   <li>Valida login e senha</li>
+     *   <li>Busca o usuário no banco</li>
+     *   <li>Define a role do usuário</li>
+     *   <li>Gera o token JWT</li>
+     *   <li>Adiciona o token como cookie na resposta</li>
+     * </ol>
+     * 
+     * @param loginDTO objeto contendo login e senha
+     * @param response resposta HTTP (para adicionar o cookie)
+     * @return token JWT gerado
+     */
     public String login(LoginDTO loginDTO, HttpServletResponse response) {
 
 

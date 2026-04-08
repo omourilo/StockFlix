@@ -18,6 +18,18 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Filtro responsável por interceptar requisições HTTP e validar o token JWT.
+ * 
+ * <p>Essa classe é executada a cada requisição e verifica se existe um token
+ * de autenticação no cabeçalho da requisição.</p>
+ * 
+ * <p>Se o token for válido, o usuário é autenticado automaticamente no
+ * contexto de segurança do Spring.</p>
+ * 
+ * <p>Extende {@link OncePerRequestFilter}, garantindo que o filtro seja
+ * executado apenas uma vez por requisição.</p>
+ */
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
@@ -29,6 +41,21 @@ public class JwtFilter extends OncePerRequestFilter {
         this.userDetailsService = userDetailsService;
     }
 
+    /**
+     * Método principal do filtro, executado a cada requisição HTTP.
+     * 
+     * <p>Fluxo:</p>
+     * <ol>
+     *   <li>Verifica se existe um token no cabeçalho Authorization</li>
+     *   <li>Extrai o email do token</li>
+     *   <li>Valida o token</li>
+     *   <li>Autentica o usuário no contexto do Spring Security</li>
+     * </ol>
+     * 
+     * @param request requisição HTTP
+     * @param response resposta HTTP
+     * @param chain cadeia de filtros
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,

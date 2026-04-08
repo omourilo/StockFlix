@@ -19,6 +19,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Classe de configuração de segurança da aplicação.
+ * 
+ * <p>Define as regras de autenticação, autorização e filtros de segurança
+ * utilizando o Spring Security.</p>
+ * 
+ * <p>Configura a aplicação para utilizar autenticação baseada em JWT,
+ * sem uso de sessões (stateless).</p>
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -28,6 +37,22 @@ public class SecurityConfig {
     private final JwtFilter jwtFilter;
     private final UserDetailsService userDetailsService;
 
+
+    /**
+     * Configura a cadeia de filtros de segurança.
+     * 
+     * <p>Define:</p>
+     * <ul>
+     *   <li>Desabilitação do CSRF</li>
+     *   <li>Política de sessão stateless</li>
+     *   <li>Regras de autorização por rota</li>
+     *   <li>Adição do filtro JWT</li>
+     * </ul>
+     * 
+     * @param http objeto de configuração de segurança HTTP
+     * @return cadeia de filtros configurada
+     * @throws Exception em caso de erro na configuração
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
@@ -50,16 +75,40 @@ public class SecurityConfig {
         .build();
     }
 
+
+    /**
+     * Define o codificador de senha utilizado pela aplicação.
+     * 
+     * <p>Utiliza o algoritmo BCrypt para armazenar senhas de forma segura.</p>
+     * 
+     * @return codificador de senha
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Define o gerenciador de autenticação do Spring.
+     * 
+     * @param authenticationConfiguration configuração de autenticação
+     * @return gerenciador de autenticação
+     * @throws Exception em caso de erro
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
         return authenticationConfiguration.getAuthenticationManager();
     }
     
+    /**
+     * Define o provedor de autenticação baseado em banco de dados.
+     * 
+     * <p>Utiliza o {@link DaoAuthenticationProvider} para buscar usuários
+     * e validar credenciais.</p>
+     * 
+     * @return provedor de autenticação configurado
+     * @throws Exception em caso de erro
+     */
     @Bean
     public AuthenticationProvider authenticationProvider() throws Exception {
     	
