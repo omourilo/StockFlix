@@ -2,10 +2,12 @@ package com.stockFlix.usuario;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.stockFlix.excecoes.NotFoundException;
 
+import io.jsonwebtoken.security.Password;
 import jakarta.transaction.Transactional;
 
 /**
@@ -20,14 +22,17 @@ public class UsuarioService {
 	//instanciamento do repositorio do usuario no service
 	private final UsuarioRepository usuarioRepository;
 	
+	private final PasswordEncoder passwordEncoder;
+	
 	
 	/**
 	 * Construtor responsável pela ligação com o Repository
 	 * 
 	 * @param usuarioRepository repositório de acesso aos dados de Usuario
 	 */
-	public UsuarioService(UsuarioRepository usuarioRepository) {
+	public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
 		this.usuarioRepository = usuarioRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	/**
@@ -43,7 +48,7 @@ public class UsuarioService {
 	 */
 	public UsuarioDTO createUsuario(UsuarioDTO usuarioDTO) {
 		Usuario usuarioEntity = new Usuario(usuarioDTO);
-		
+		usuarioEntity.setSenha(passwordEncoder.encode(usuarioEntity.getSenha()));
 		return new UsuarioDTO(usuarioRepository.save(usuarioEntity));	
 	}
 	

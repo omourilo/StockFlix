@@ -10,12 +10,14 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public class JwtUtil {
     
     private final SecretKey SECRET = Keys.hmacShaKeyFor(
-        Decoders.BASE64.decode(System.getenv("JWT_SECRET"))) ;
+        Decoders.BASE64.decode(System.getProperty("JWT_SECRET"))) ;
     private final long EXPIRACAO = 1000 * 60 * 60 * 8; //Calculo para 8 horas de expiração
 
     public String gerarToken(String email, String tipo) {
