@@ -3,7 +3,12 @@ package com.stockFlix.config;
 
 import java.io.IOException;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.stockFlix.auth.JwtUtil;
@@ -13,6 +18,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+@Component
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
@@ -35,6 +41,25 @@ public class JwtFilter extends OncePerRequestFilter {
             chain.doFilter( request, response);
             return;
         }
+        
+        String token = header.substring(7);
+        String email = jwtUtil.extrairEmail(token);
+        
+        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        	UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        	
+        	if (jwtUtil.validarToken(token, email)) {
+        		UsernamePasswordAuthenticationToken auth = 
+        				new UsernamePasswordAuthenticationToken(
+        						userDetails, null, userDetails.getAuthorities()
+        		);
+        	auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        	SecurityContextHolder.getContext().setAuthentication(auth);
+        	
+        	}
+        }
+        
+        chain.doFilter(request, response);
 
     }
     
