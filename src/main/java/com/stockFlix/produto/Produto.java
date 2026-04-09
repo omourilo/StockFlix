@@ -52,9 +52,11 @@ public class Produto {
 	private Setor setor;
 	
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+	@JsonIgnore
 	List<Movimentacao> movimentacoes = new ArrayList<>();
 
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.All)
+	@JsonIgnore 
 	List<Previsao> previsoes = new ArrayList<>();
 	
 }

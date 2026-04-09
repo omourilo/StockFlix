@@ -37,6 +37,7 @@ public class Setor {
 	private String nome;
 	
 	@OneToMany(mappedBy = "setor", cascade = CascadeType.ALL)
+	@JsonIgnore
 	List<Produto> produtos = new ArrayList<>();
 	
 	@ManyToOne

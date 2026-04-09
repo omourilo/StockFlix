@@ -34,6 +34,7 @@ public class Estoque {
 	private String nome;
 
 	@OneToMany(mappedBy = "estoque" , cascade = CascadeType.ALL)
+	@JsonIgnore
 	List<Setor> setores = new ArrayList<>();
 	
 	
