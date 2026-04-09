@@ -1,7 +1,10 @@
-package com.stockFlix.movimentacao;
+package com.stockFlix.previsao;
 
-import javax.annotation.processing.Generated;
+import java.time.LocalDate;
 
+import com.stockFlix.produto.Produto;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,9 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,26 +24,28 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "movimentacoes")
-public class Movimentacao {
-
+@Table(name = "previsoes")
+public class Previsao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    /**
-     * Define se é uma movimentação de saída ou entrada.
-     */
-    @Column(nullable = false)
-    private Boolean tipoMovimentacao;
 
     @Column(nullable = false)
     @Min(0)
-    private int qtdMovimentada; 
+    private int qtdPrevista;
+
+    @Column(nullable = false)
+    private LocalDate inicioPeriodo;
+
+    @Column(nullable = false)
+    private LocalDate fimPeriodo;
+
+    @Column
+    private LocalDate criadoEm = LocalDate.now(); 
 
     @ManyToOne
     @JoinColumn(name = "produto_id")
-    private Produto produto; 
-
+    private Produto produto;
+    
 }

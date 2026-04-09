@@ -1,5 +1,8 @@
 package com.stockFlix.produto;
 
+import java.util.List;
+
+import com.stockFlix.previsao.Previsao;
 import com.stockFlix.setor.Setor;
 
 import jakarta.persistence.Column;
@@ -51,5 +54,7 @@ public class Produto {
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
 	List<Movimentacao> movimentacoes = new ArrayList<>();
 
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.All)
+	List<Previsao> previsoes = new ArrayList<>();
 	
 }
