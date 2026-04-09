@@ -23,7 +23,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "movimentacoes")
-public class movimentacao {
+public class Movimentacao {
 
 
     @Id
