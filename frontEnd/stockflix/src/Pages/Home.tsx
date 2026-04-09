@@ -72,7 +72,7 @@ function Home() {
                             <td className="px-4 py-3 text-gray-700">{item.preco}</td>
                             <td className="px-4 py-3 text-gray-700">{item.quantidade}</td>
                             <td className="px-4 py-3 text-right">
-                              <Link to={`/${item.id}`} className="text-blue-600 hover:text-blue-800 font-medium underline">
+                              <Link to={`/Products/${item.id}`} className="text-blue-600 hover:text-blue-800 font-medium underline">
                                 Ver detalhes
                               </Link>
                             </td>
