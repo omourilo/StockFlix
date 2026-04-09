@@ -129,7 +129,7 @@ public class UsuarioService {
 	public void deleteUsuario(Long id) {
 		
 		/**
-		 * Para parar a execução de update, 
+		 * Para parar a execução de delete, 
 		 * ele já faz uma busca com {@code .orElseThrow} 
 		 * para lançar a exceção caso não encotre o usuario e parar a execução
 		 */

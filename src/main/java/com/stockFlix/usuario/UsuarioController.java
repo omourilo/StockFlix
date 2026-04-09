@@ -52,11 +52,11 @@ public class UsuarioController {
      * Cria um novo usuário.
      *
      * @param usuarioDTO dados do usuário a ser criado
-     * @return {@code UsuarioDTO} contendo os dados persistidos
+     * @return {@see ResponseEntity<>} com resposta 201 e contendo os dados persistidos
      */
 	@PostMapping
-	public UsuarioDTO createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
-		return usuarioService.createUsuario(usuarioDTO);
+	public ResponseEntity<UsuarioDTO> createUsuario(@RequestBody UsuarioDTO usuarioDTO) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.createUsuario(usuarioDTO));
 	}
 	
     /**
