@@ -1,4 +1,4 @@
-import { Home, LayoutDashboard, History, LogOut } from 'lucide-react';
+import { Home, History, LogOut,Boxes } from 'lucide-react';
 import { Link } from 'react-router-dom'
 
 interface SidebarProps {
@@ -18,11 +18,11 @@ const Sidebar = ( { isOpen }: SidebarProps) => {
       <li>
         <Link to="/" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
           <span className="text-gray-400 group-hover:text-blue-400"><Home size={20}/></span>
-          <span className="font-medium">Home</span>
-        </Link>
-        <Link to="/Dashboard" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
-          <span className="text-gray-400 group-hover:text-blue-400"><LayoutDashboard size={20} /></span>
           <span className="font-medium">Dashboard</span>
+        </Link>
+        <Link to="/Products" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
+          <span className="text-gray-400 group-hover:text-blue-400"><Boxes size={20} /></span>
+          <span className="font-medium">Products</span>
         </Link>
         <Link to="/History" className="flex items-center gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-white/10 hover:text-white group">
           <span className="text-gray-400 group-hover:text-blue-400"><History size={20} /></span>
