@@ -15,8 +15,6 @@ function Home() {
     quantidade:number;
   }
 
-
-
   const [sidebarOpen, setsidebarOpen] = useState(true)
 
   return (
@@ -52,7 +50,7 @@ function Home() {
                 </div>
               </div>
             <div>
-              <div className="mt-4 border border-gray-200">
+              <div className="mt-4 border border-gray-200 overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 bg-white text-sm">
                       <thead className="bg-gray-50">
                         <tr>
