@@ -29,9 +29,6 @@ function Home() {
 
               <div className="flex items-baseline gap-3">
                 <h1 className="text-3xl font-bold text-gray-800 tracking-tight">Estoque</h1>
-                <span className="text-sm font-medium text-gray-500 px-2 py-0.5">
-                  10 itens cadastrados
-                </span>
               </div>
 
                 <div className="flex flex-col sm:flex-row sm:justify-between gap-4 w-full">
@@ -43,7 +40,7 @@ function Home() {
                     </button>
                   </div>
                   
-                  <Link to={'/Create'} className="flex items-center w-50 md:w-auto gap-2 bg-green-600 cursor-pointer hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg ">
+                  <Link to={'/Create'} className="flex items-center w-50 md:w-auto gap-2 bg-green-500 hover:bg-green-600 cursor-pointer text-white font-bold py-2 px-6 rounded-lg ">
                     <span className="text-sm lg:text-lg">+</span>
                     Adicionar produto
                   </Link>
