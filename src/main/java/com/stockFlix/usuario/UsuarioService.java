@@ -82,12 +82,12 @@ public class UsuarioService {
 		 * ele já faz uma busca com {@code .orElseThrow} 
 		 * para lançar a exceção caso não encotre o usuario e parar a execução
 		 */
-		usuarioRepository.findById(id)
+		Usuario usuarioEntity = usuarioRepository.findById(id)
 						.orElseThrow(() -> new NotFoundException("Usuario não encontrado!!"));
-		
-		Usuario usuarioEntity = new Usuario(usuarioDTO);
-		usuarioEntity.setId(id);
-		
+
+		usuarioEntity.setLogin(usuarioDTO.login());
+		usuarioEntity.setSenha(passwordEncoder.encode(usuarioDTO.senha()));
+		usuarioEntity.setAcessoADM(usuarioDTO.acessoADM());
 		
 		return new UsuarioDTO(usuarioRepository.save(usuarioEntity));
 	}
