@@ -86,8 +86,8 @@ function Dashboard() {
             <section className='grid grid-cols-1 lg:grid-cols-4 gap-4 mt-6'>
               <section className=' lg:col-span-3 border border-zinc-300 rounded-lg p-6 '>
                 <section className='mb-2 flex justify-between'>
-                  <h2 className='font-bold'>Itens abaixo do mínimo</h2>
-                  <p className='text-[0.7rem] p-0.5 px-2 flex items-center justify-center rounded-lg font-bold bg-red-200 text-red-800'> x itens críticos </p>
+                  <h2 className='font-bold'> <span className='text-red-500 text-bold '> • </span>Alerta de reposição </h2>
+                  <p className='text-[0.7rem] p-0.5 px-2 flex items-center justify-center rounded-lg font-bold bg-red-200 text-red-800'> 3 itens críticos </p>
                 </section>
                 <section className='overflow-x-auto'>
                   <table className="min-w-full divide-y divide-gray-200 bg-white text-sm">
