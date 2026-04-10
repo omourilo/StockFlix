@@ -2,6 +2,9 @@ package com.stockFlix.usuario;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,10 +70,10 @@ public class UsuarioController {
      * @return {@code UsuarioDTO} com os dados atualizados
      */
 	@PutMapping("/{id}")
-	public UsuarioDTO updateUsuario(
+	public ResponseEntity<UsuarioDTO> updateUsuario(
 			@PathVariable Long id,
 			@RequestBody UsuarioDTO usuarioDTO) {
-		return usuarioService.updateUsuario(id, usuarioDTO);
+		return ResponseEntity.ok().body(usuarioService.updateUsuario(id, usuarioDTO));
 	}
 	
     /**
@@ -79,6 +82,7 @@ public class UsuarioController {
      * @param id identificador do usuário
      */
 	@DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) 
 	public void deleteUsuario(@PathVariable Long id) {
 		usuarioService.deleteUsuario(id);
 	}
