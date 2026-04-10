@@ -1,13 +1,13 @@
 package com.stockFlix.usuario;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.stockFlix.excecoes.LoginAlreadyExistsException;
 import com.stockFlix.excecoes.NotFoundException;
-
-import io.jsonwebtoken.security.Password;
 import jakarta.transaction.Transactional;
 
 /**
@@ -47,9 +47,16 @@ public class UsuarioService {
 	 * @return usuarioDTO contendo os dados persistidos
 	 */
 	public UsuarioDTO createUsuario(UsuarioDTO usuarioDTO) {
+
+		if(usuarioRepository.findByLogin(usuarioDTO.login()).isPresent() ) {
+			throw new LoginAlreadyExistsException("Email já registrado no banco!"); 
+		}
+
 		Usuario usuarioEntity = new Usuario(usuarioDTO);
 		usuarioEntity.setSenha(passwordEncoder.encode(usuarioEntity.getSenha()));
 		return new UsuarioDTO(usuarioRepository.save(usuarioEntity));	
+	
+
 	}
 	
 	

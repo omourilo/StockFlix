@@ -9,7 +9,7 @@ import static org.mockito.Mockito.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.junit.jupiter.api.Assertions.*; 
+import static org.junit.jupiter.api.Assertions.*;
 
 import com.stockFlix.usuario.*;
 
@@ -19,28 +19,28 @@ class UsuarioServiceTest {
     @Mock
     private UsuarioRepository usuarioRepo;
     @Mock
-    private PasswordEncoder passwordEncoder; 
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
-    private UsuarioService usuarioService; 
+    private UsuarioService usuarioService;
 
     @Test
     void testCreateUsuario() {
-        //Arrange
+        // Arrange
         UsuarioDTO usuarioDTO = new UsuarioDTO("Ramon@email", "1234", true);
 
         Usuario usuarioEntity = new Usuario(1L, "Ramon@email", "1234", true);
 
         when(usuarioRepo.save(any(Usuario.class))).thenReturn(usuarioEntity);
 
-        //Act
+        // Act
         UsuarioDTO resultadoDTO = usuarioService.createUsuario(usuarioDTO);
 
-        //Assert
-        assertEquals("Ramon@email", resultadoDTO.login()); 
+        // Assert
+        assertEquals("Ramon@email", resultadoDTO.login());
         assertEquals("1234", resultadoDTO.senha());
         assertEquals(true, resultadoDTO.acessoADM());
 
     }
-    
+
 }

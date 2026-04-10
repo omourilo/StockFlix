@@ -41,7 +41,7 @@ public class Usuario implements UserDetails{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	@Email
 	private String login;
 	@Column(nullable = false)
