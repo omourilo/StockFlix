@@ -6,6 +6,8 @@ import java.util.List;
 import com.stockFlix.estoque.Estoque;
 import com.stockFlix.produto.Produto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

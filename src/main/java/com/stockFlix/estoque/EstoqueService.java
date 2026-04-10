@@ -1,6 +1,12 @@
 package com.stockFlix.estoque;
 
+import com.stockFlix.excecoes.NotFoundException;
+
 import jakarta.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class EstoqueService {
@@ -22,7 +28,7 @@ public class EstoqueService {
         Estoque estoqueEntity = estoqueRepo.findById(id)
                                         .orElseThrow(() -> new NotFoundException("Estoque não encontrado!"));
 
-        estoqueEntity.setNome(estoqueDTO.getNome());
+        estoqueEntity.setNome(estoqueDTO.nome());
         estoqueRepo.save(estoqueEntity); 
         return new EstoqueDTO(estoqueEntity);
     }

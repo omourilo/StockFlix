@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.stockFlix.setor.Setor;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,6 +38,11 @@ public class Estoque {
 	@OneToMany(mappedBy = "estoque" , cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Setor> setores = new ArrayList<>();
+
+	public Estoque(EstoqueDTO estoqueDTO) {
+		this.Id = estoqueDTO.id();
+		this.nome = estoqueDTO.nome(); 
+	}
 	
 	
 }

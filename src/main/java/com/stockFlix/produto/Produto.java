@@ -1,9 +1,13 @@
 package com.stockFlix.produto;
 
 import java.util.List;
+import java.util.ArrayList; 
 
 import com.stockFlix.previsao.Previsao;
 import com.stockFlix.setor.Setor;
+import com.stockFlix.movimentacao.Movimentacao;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +19,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -55,7 +61,7 @@ public class Produto {
 	@JsonIgnore
 	List<Movimentacao> movimentacoes = new ArrayList<>();
 
-	@OneToMany(mappedBy = "produto", cascade = CascadeType.All)
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
 	@JsonIgnore 
 	List<Previsao> previsoes = new ArrayList<>();
 	

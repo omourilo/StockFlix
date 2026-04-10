@@ -2,6 +2,8 @@ package com.stockFlix.movimentacao;
 
 import javax.annotation.processing.Generated;
 
+import com.stockFlix.produto.Produto;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
