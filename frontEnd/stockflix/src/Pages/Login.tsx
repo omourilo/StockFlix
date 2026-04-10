@@ -1,8 +1,20 @@
+import { useState,useContext } from 'react'
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/logo.svg'
 
 function Login() {
-  
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    login(email,senha);
+    navigate('/');
+  };
   return (
+    
     <>
        <section className="w-screen h-screen flex">
   
@@ -16,15 +28,15 @@ function Login() {
       <p className="text-slate-500 text-sm">Entre com suas credenciais de estoque</p>
     </div>
 
-    <form className="space-y-6">
+    <form className="space-y-6" onSubmit={handleSubmit}>
       <div className="space-y-1">
         <label className="text-sm font-medium text-slate-700 ml-1">Usuário</label>
-        <input type="text" placeholder="ex: eduardo.estoque" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 placeholder:text-slate-400"/>
+        <input type="text" onChange={(e) => setEmail(e.target.value)} placeholder="ex: eduardo.estoque" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 placeholder:text-slate-400"/>
       </div>
 
       <div className="space-y-1">
         <label className="text-sm font-medium text-slate-700 ml-1">Senha</label>
-        <input type="password" placeholder="••••••••" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400" />
+        <input type="password" placeholder="••••••••" onChange={(e) => setSenha(e.target.value)}  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400" />
       </div>
 
       <button type="submit" className="w-full py-3 px-4 bg-violet-700 hover:bg-violet-900 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transform active:scale-[0.98] transition-all cursor-pointer">
