@@ -3,8 +3,10 @@ import Sidebar from '../components/Sidebar.tsx'
 import Footer from '../components/Footer.tsx'
 import { Search } from 'lucide-react'
 import { useState } from 'react'
-import { produtos } from '../data/constants.ts';
+import { produtos } from '../data/constants.ts'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext';
+
 
 
 function Home() {
@@ -14,6 +16,8 @@ function Home() {
     preco:string;
     quantidade:number;
   }
+  
+  const { user } = useAuth();
 
   const [sidebarOpen, setsidebarOpen] = useState(true)
 
@@ -40,10 +44,12 @@ function Home() {
                     </button>
                   </div>
                   
+                  {user?.role === "admin"  && (
                   <Link to={'/Create'} className="flex items-center w-50 md:w-auto gap-2 bg-green-500 hover:bg-green-600 cursor-pointer text-white font-bold py-2 px-6 rounded-lg ">
                     <span className="text-sm lg:text-lg">+</span>
                     Adicionar produto
                   </Link>
+                  )}
                 </div>
               </div>
             <div>

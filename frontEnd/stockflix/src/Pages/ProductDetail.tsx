@@ -4,11 +4,13 @@ import Sidebar from '../components/Sidebar.tsx'
 import Footer from '../components/Footer.tsx'
 import Movement from '../components/Movement.tsx'
 import { useState } from 'react'
+import { useAuth } from '../context/AuthContext';
 import { produtos, type Produto } from '../data/constants.ts'
 
 const ProductDetail = () =>{
     const { id } = useParams<{ id: string}>();
     const [sidebarOpen, setsidebarOpen] = useState(true);
+    const { user } = useAuth();
 
     const [produto, setProduto] = useState<Produto | undefined>(() => 
         produtos.find(p => p.id === Number(id))
@@ -83,9 +85,11 @@ const ProductDetail = () =>{
                             <section className="border-t border-(--borderColor) p-8 ">
                                 <Movement produtoAtual={produto} onUpdate={atualizarEstoquePai}/>
                             </section>
-                            <section className="border-t border-(--borderColor) flex items-center justify-center p-6">
+
+                            {user?.role === "admin"  && (<section className="border-t border-(--borderColor) flex items-center justify-center p-6">
                                 <button className="p-2 border border-zinc-400 cursor-pointer rounded-md">editar</button>
                             </section>
+                            )}
 
                     </div>
                 </section>
