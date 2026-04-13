@@ -3,7 +3,7 @@ package com.stockFlix.setor;
 public record SetorDTO(
     long id,
     String nome,
-    long estoqueId
+    Long estoqueId
 ) {
     public SetorDTO(Setor setor) {
         this(
