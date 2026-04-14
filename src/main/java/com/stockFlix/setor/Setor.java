@@ -44,6 +44,10 @@ public class Setor {
 	@ManyToOne
 	@JoinColumn(name = "estoque_id")
 	private Estoque estoque;
+
+	public Setor(SetorDTO setorDTO) {
+		this.nome = setorDTO.nome();
+	}
 	
 
 }
