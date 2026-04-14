@@ -1,14 +1,13 @@
 package com.stockFlix.auth;
 
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.ResponseCookie;
-
 
 import com.stockFlix.usuario.UsuarioRepository;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 
 /**

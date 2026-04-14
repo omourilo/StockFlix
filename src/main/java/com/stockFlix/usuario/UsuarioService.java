@@ -1,11 +1,13 @@
 package com.stockFlix.usuario;
 
 import java.util.List;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.stockFlix.excecoes.LoginAlreadyExistsException;
 import com.stockFlix.excecoes.NotFoundException;
+
 import jakarta.transaction.Transactional;
 
 /**

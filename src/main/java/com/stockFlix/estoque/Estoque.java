@@ -3,9 +3,8 @@ package com.stockFlix.estoque;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.stockFlix.setor.Setor;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.stockFlix.setor.Setor;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -15,9 +14,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -40,7 +39,6 @@ public class Estoque {
 	List<Setor> setores = new ArrayList<>();
 
 	public Estoque(EstoqueDTO estoqueDTO) {
-		this.Id = estoqueDTO.id();
 		this.nome = estoqueDTO.nome(); 
 	}
 	

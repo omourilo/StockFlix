@@ -1,12 +1,12 @@
 package com.stockFlix.estoque;
 
-import com.stockFlix.excecoes.NotFoundException;
-
-import jakarta.transaction.Transactional;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.stockFlix.excecoes.NotFoundException;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class EstoqueService {

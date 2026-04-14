@@ -3,10 +3,9 @@ package com.stockFlix.setor;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.stockFlix.estoque.Estoque;
 import com.stockFlix.produto.Produto;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
