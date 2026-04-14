@@ -1,7 +1,7 @@
 package com.stockFlix.setor;
 
 public record SetorDTO(
-    long id,
+    Long id,
     String nome,
     Long estoqueId
 ) {
