@@ -66,8 +66,11 @@ public class SecurityConfig {
             .requestMatchers(HttpMethod.POST, "/usuarios").hasRole("ADMIN")
             .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasRole("ADMIN")
             .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
-            .requestMatchers(HttpMethod.GET, "/usuarios/**").authenticated()) //Só vou colocar as rotas exclusivas do ADMIM, o resto vai ficar authenticated, para o admim conseguir acessar as rotas tbm
-        
+            .requestMatchers(HttpMethod.GET, "/usuarios/**").authenticated()//Só vou colocar as rotas exclusivas do ADMIM, o resto vai ficar authenticated, para o admim conseguir acessar as rotas tbm
+            .requestMatchers(HttpMethod.POST, "/estoques").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.PUT, "/estoques/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/estoques/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.GET, "/estoques/**").authenticated())         
         .authenticationProvider(authenticationProvider())
         
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
