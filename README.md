@@ -77,7 +77,7 @@ As principais entidades são:
 - Usuário — credenciais de acesso e nível de permissão (ADM ou funcionário)
 
 ### Banco de Dados
-Estrutura relacional com as tabelas: `Produto`, `Setor`, `Estoque`, `Previsão` e `Usuario`, conectadas por chaves primárias e estrangeiras, formando uma hierarquia organizada de armazenamento.
+Estrutura relacional com as tabelas: `Produto`, `Setor`, `Estoque`,`movimentação`, `Previsão` e `Usuario`, conectadas por chaves primárias e estrangeiras, formando uma hierarquia organizada de armazenamento.
 
 ## Regras de Negócio
 
