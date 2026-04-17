@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.stockFlix.excecoes.NotFoundException;
+import com.stockFlix.excecoes.PopulatedDeleteException;
 
 import jakarta.transaction.Transactional;
 
@@ -46,8 +47,12 @@ public class EstoqueService {
     }
 
     public void deleteEstoque(long id) {
-        estoqueRepo.findById(id)
+        Estoque estoqueEntity = estoqueRepo.findById(id)
                     .orElseThrow(() -> new NotFoundException("Estoque não encontrado!"));
+        if (estoqueRepo.existsByEstoqueId(id)) {
+            throw new PopulatedDeleteException("Impossivel deletar, estoque com " + estoqueEntity.getSetores().size() + " setores que serão afetados");
+        }
+
         estoqueRepo.deleteById(id); 
     }
 

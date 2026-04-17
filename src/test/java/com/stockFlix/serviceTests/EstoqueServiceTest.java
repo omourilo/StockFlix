@@ -23,6 +23,7 @@ import com.stockFlix.estoque.EstoqueDTO;
 import com.stockFlix.estoque.EstoqueRepository;
 import com.stockFlix.estoque.EstoqueService;
 import com.stockFlix.excecoes.NotFoundException;
+import com.stockFlix.excecoes.PopulatedDeleteException;
 
 @ExtendWith(MockitoExtension.class)
 class EstoqueServiceTest { 
@@ -97,6 +98,17 @@ class EstoqueServiceTest {
         when(estoqueRepo.findById(anyLong())).thenReturn(Optional.empty());
 
         NotFoundException ex = assertThrows(NotFoundException.class, () -> estoqueService.deleteEstoque(1L));
+        System.err.println(ex.getMessage());
+    }
+
+    @Test
+    void testDeleteEstoquePopulado() {
+        Estoque estoqueEntity = new Estoque(1L, "Estoque_1", new ArrayList<>());
+
+        when(estoqueRepo.findById(anyLong())).thenReturn(Optional.of(estoqueEntity));
+        when(estoqueRepo.existsByEstoqueId(anyLong())).thenReturn(true);
+
+        PopulatedDeleteException ex = assertThrows(PopulatedDeleteException.class, () -> estoqueService.deleteEstoque(1L));
         System.err.println(ex.getMessage());
     }
 
