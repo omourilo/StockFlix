@@ -65,4 +65,10 @@ public class Produto {
 	@JsonIgnore 
 	List<Previsao> previsoes = new ArrayList<>();
 	
+	public Produto(ProdutoDTO produtoDTO) {
+		this.nome = produtoDTO.nome();
+		this.preco = produtoDTO.preco();
+		//deixar sem quantidade para iniciar o produto com 0 
+		this.descricao = produtoDTO.descricao();
+	}
 }

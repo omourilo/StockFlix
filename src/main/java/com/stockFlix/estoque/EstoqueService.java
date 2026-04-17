@@ -49,7 +49,7 @@ public class EstoqueService {
     public void deleteEstoque(long id) {
         Estoque estoqueEntity = estoqueRepo.findById(id)
                     .orElseThrow(() -> new NotFoundException("Estoque não encontrado!"));
-        if (estoqueRepo.existsByEstoqueId(id)) {
+        if (!estoqueEntity.getSetores().isEmpty()) { 
             throw new PopulatedDeleteException("Impossivel deletar, estoque com " + estoqueEntity.getSetores().size() + " setores que serão afetados");
         }
 

@@ -21,7 +21,8 @@ import com.stockFlix.estoque.EstoqueService;
 public class SetorController {
 	
 	private SetorService setorService;
-	private final EstoqueService estoqueService;
+	@SuppressWarnings("unused")
+    private final EstoqueService estoqueService;
 	
 	
 	public SetorController(

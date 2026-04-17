@@ -10,6 +10,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test; 
@@ -21,10 +22,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.stockFlix.estoque.Estoque;
 import com.stockFlix.estoque.EstoqueRepository;
 import com.stockFlix.excecoes.NotFoundException;
+import com.stockFlix.excecoes.PopulatedDeleteException;
 import com.stockFlix.setor.Setor;
 import com.stockFlix.setor.SetorDTO;
 import com.stockFlix.setor.SetorRepository;
 import com.stockFlix.setor.SetorService;
+import com.stockFlix.produto.Produto;
 
 @ExtendWith(MockitoExtension.class)
 class SetorServiceTest {
@@ -131,6 +134,18 @@ class SetorServiceTest {
         when(setorRepo.findById(anyLong())).thenReturn(Optional.empty());
 
         NotFoundException ex = assertThrows(NotFoundException.class, () -> setorService.deleteSetor(1L));
+        System.err.println(ex.getMessage());
+
+    }
+
+    @Test
+    void testDeleteSetorProdutoListPopulado() {
+        Produto produtoEntity = new Produto();
+        Setor setorEntity = new Setor(1L, "Setor_1", new ArrayList<>(List.of(produtoEntity)), new Estoque());
+
+        when(setorRepo.findById(anyLong())).thenReturn(Optional.of(setorEntity));
+
+        PopulatedDeleteException ex = assertThrows(PopulatedDeleteException.class, () -> setorService.deleteSetor(1L)); 
         System.err.println(ex.getMessage());
 
     }

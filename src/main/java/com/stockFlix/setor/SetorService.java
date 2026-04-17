@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.stockFlix.estoque.Estoque;
 import com.stockFlix.estoque.EstoqueRepository;
 import com.stockFlix.excecoes.NotFoundException;
+import com.stockFlix.excecoes.PopulatedDeleteException;
 
 import jakarta.transaction.Transactional;
 
@@ -30,9 +31,8 @@ public class SetorService {
 		Setor setorEntity = new Setor(setorDTO); 
 		
 		if(setorDTO.estoqueId() != null) {
-			Estoque estoque = estoqueRepo.findById(setorDTO.estoqueId())
-					.orElseThrow(() -> new NotFoundException("Estoque não encontrado"));
-			setorEntity.setEstoque(estoque);
+			setorEntity.setEstoque(estoqueRepo.findById(setorDTO.estoqueId())
+					.orElseThrow(() -> new NotFoundException("Estoque não encontrado")));
 		}
 		
 		return new SetorDTO(setorRepo.save(setorEntity));		
@@ -70,8 +70,11 @@ public class SetorService {
 	}
 	
 	public void deleteSetor(long id) {
-		setorRepo.findById(id)
+		Setor setorEntity = setorRepo.findById(id)
 					.orElseThrow(() -> new NotFoundException("Setor não encontrado!"));
+		if (!setorEntity.getProdutos().isEmpty()) { 
+            throw new PopulatedDeleteException("Impossivel deletar, estoque com " + setorEntity.getProdutos().size() + " setores que serão afetados");
+        }
 		setorRepo.deleteById(id);	
 	}
 	
