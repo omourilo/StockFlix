@@ -106,7 +106,7 @@ class EstoqueServiceTest {
     @Test
     void testDeleteEstoqueSetorListPopulado() {
         Setor setorEntity = new Setor();
-        Estoque estoqueEntity = new Estoque(1L, "Estoque_1", new ArrayList<>(List.of(setorEntity)) );
+        Estoque estoqueEntity = new Estoque(1L, "Estoque_1", new ArrayList<>(List.of(setorEntity)));
 
         when(estoqueRepo.findById(anyLong())).thenReturn(Optional.of(estoqueEntity));
 

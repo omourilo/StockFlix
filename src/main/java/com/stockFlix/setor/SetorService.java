@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.stockFlix.estoque.Estoque;
 import com.stockFlix.estoque.EstoqueRepository;
 import com.stockFlix.excecoes.NotFoundException;
 import com.stockFlix.excecoes.PopulatedDeleteException;
