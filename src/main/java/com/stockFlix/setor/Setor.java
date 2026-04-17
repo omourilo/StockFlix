@@ -42,7 +42,7 @@ public class Setor {
 	List<Produto> produtos = new ArrayList<>();
 	
 	@ManyToOne
-	@JoinColumn(name = "estoque_id")
+	@JoinColumn(name = "estoque_id", nullable = false)
 	private Estoque estoque;
 
 	public Setor(SetorDTO setorDTO) {

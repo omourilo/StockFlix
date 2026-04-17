@@ -44,8 +44,8 @@ public class SetorService {
 				.orElseThrow(() -> new NotFoundException("Setor não encontrado!"));
 		
 		setorEntity.setNome(setorDTO.nome());
-		setorEntity.setEstoque(estoqueRepo.findById(setorDTO.id())
-				.orElseThrow(() -> new NotFoundException("Setor não encontrado!")));
+		setorEntity.setEstoque(estoqueRepo.findById(setorDTO.estoqueId())
+				.orElseThrow(() -> new NotFoundException("Estoque não encontrado!")));
 		
 		return new SetorDTO(setorRepo.save(setorEntity));
 	}
