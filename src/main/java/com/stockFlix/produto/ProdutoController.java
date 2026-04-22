@@ -21,6 +21,7 @@ import com.stockFlix.setor.SetorService;
 public class ProdutoController {
     
     private ProdutoService produtoService;
+    @SuppressWarnings("unused")
     private SetorService setorService;
 
     public ProdutoController(
