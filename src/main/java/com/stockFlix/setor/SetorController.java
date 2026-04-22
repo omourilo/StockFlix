@@ -43,7 +43,7 @@ public class SetorController {
         return setorService.readSetorById(id); 
     }
     
-    @GetMapping("/setor/{id}")
+    @GetMapping("/estoque/{id}")
     public List<SetorDTO> getAllSetoresByEstoqueId(@PathVariable long id) {
     	return setorService.readSetoresByEstoqueId(id);
     }
