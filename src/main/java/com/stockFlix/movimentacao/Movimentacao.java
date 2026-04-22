@@ -1,5 +1,7 @@
 package com.stockFlix.movimentacao;
 
+import java.time.LocalDate;
+
 import com.stockFlix.produto.Produto;
 
 import jakarta.persistence.Column;
@@ -39,8 +41,18 @@ public class Movimentacao {
     @Min(0)
     private int qtdMovimentada; 
 
+    @Column(nullable = false)
+    private LocalDate data;
+
     @ManyToOne
     @JoinColumn(name = "produto_id")
     private Produto produto; 
 
+
+    public Movimentacao(MovimentacaoDTO movimentacaoDTO) {
+        this.tipoMovimentacao = movimentacaoDTO.tipoMovimentacao();
+        this.qtdMovimentada = movimentacaoDTO.qtdMovimentada();
+        this.data = LocalDate.parse(movimentacaoDTO.data());
+        
+    }
 }
