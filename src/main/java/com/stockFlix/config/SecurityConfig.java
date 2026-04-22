@@ -1,5 +1,7 @@
 package com.stockFlix.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,6 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import lombok.RequiredArgsConstructor;
 
@@ -61,8 +66,10 @@ public class SecurityConfig {
 
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+        
         .authorizeHttpRequests(auth -> auth
-        	.requestMatchers("/auth/login").permitAll()
+        	.requestMatchers("/auth/login", "/swagger-ui/**" , "/v3/api-docs/**").permitAll()
             .requestMatchers(HttpMethod.POST, "/usuarios").hasRole("ADMIN")
             .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasRole("ADMIN")
             .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
@@ -121,5 +128,19 @@ public class SecurityConfig {
     	authProvider.setPasswordEncoder(passwordEncoder());
     	
     	return authProvider;	
+    }
+    
+    
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+    	CorsConfiguration config = new CorsConfiguration();
+    	config.setAllowedOrigins(List.of("http://10.0.0.117:3000"));
+    	config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+    	config.setAllowedHeaders(List.of("*"));
+    	config.setAllowCredentials(true);
+
+    	UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    	source.registerCorsConfiguration("/**", config);
+    	return source;
     }
 }

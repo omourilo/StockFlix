@@ -2,7 +2,6 @@ package com.stockFlix.movimentacao;
 
 import org.springframework.stereotype.Service;
 
-import com.stockFlix.excecoes.InsufficientStockException;
 import com.stockFlix.excecoes.NotFoundException;
 import com.stockFlix.produto.Produto;
 import com.stockFlix.produto.ProdutoRepository;
@@ -23,27 +22,20 @@ public class MovimentacaoService {
 
     public MovimentacaoDTO createMovimentacao(MovimentacaoDTO movimentDTO) {
         Movimentacao movimentEntity = new Movimentacao(movimentDTO);
+        Produto produtoEntity = produtoRepo.findById(movimentDTO.produtoId())
+                .orElseThrow(() -> new NotFoundException("Produto não encontrado!"));
 
-        if(movimentDTO.produtoId() != null) {
-            movimentEntity.setProduto(produtoRepo.findById(movimentDTO.produtoId())
-                .orElseThrow(() -> new NotFoundException("Setor não encontrado!")));
-        }
 
+        movimentEntity.setProduto(produtoEntity);
+        
         //Se for true é adição
         if (movimentEntity.getTipoMovimentacao()) {
-            Produto produtoEntity = produtoRepo.findById(movimentDTO.produtoId())
-                        .orElseThrow(() -> new NotFoundException("Produto não encontrado!")); 
             produtoEntity.adicionarQuantidade(movimentDTO.qtdMovimentada());
         }else {
-            try {
-                Produto produtoEntity = produtoRepo.findById(movimentDTO.produtoId())
-                             .orElseThrow(() -> new NotFoundException("Produto não encontrado!")); 
-            produtoEntity.removerQuantidade(movimentDTO.qtdMovimentada());
-            } catch (InsufficientStockException e) {
-               System.err.println(e);
-            }
+        	produtoEntity.removerQuantidade(movimentDTO.qtdMovimentada());
         }
 
+        produtoRepo.save(produtoEntity);
         return new MovimentacaoDTO(movimentacaoRepo.save(movimentEntity));
     }
 }
