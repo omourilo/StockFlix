@@ -34,7 +34,7 @@ class UsuarioServiceTest {
     @Test
     void testCreateUsuario() {
         // Arrange
-        UsuarioDTO usuarioDTO = new UsuarioDTO("Ramon@email", "1234", true); 
+        UsuarioDTO usuarioDTO = new UsuarioDTO(1L, "Ramon@email", "1234", true); 
 
         Usuario usuarioEntity = new Usuario(1L, "Ramon@email", "1234", true);
 
@@ -52,7 +52,7 @@ class UsuarioServiceTest {
 
     @Test
     void testCreateUsuarioLoginJaExiste() {
-        UsuarioDTO usuarioDTO = new UsuarioDTO("Ramon@email", "1234", true);
+        UsuarioDTO usuarioDTO = new UsuarioDTO(1L, "Ramon@email", "1234", true);
 
         Usuario usuarioEntity = new Usuario();
 
@@ -66,7 +66,7 @@ class UsuarioServiceTest {
     @Test
     void testUpdateUsuario() {
         // Arrange
-        UsuarioDTO usuarioDTO = new UsuarioDTO("Ramon@email", "1234", true); 
+        UsuarioDTO usuarioDTO = new UsuarioDTO(1L, "Ramon@email", "1234", true); 
 
         Usuario usuarioEntity = new Usuario(1L, "Ramon@email", "1234", true);
 
@@ -86,7 +86,7 @@ class UsuarioServiceTest {
     @Test
     void testUpdateUsuarioNaoEncontrado() {
         // Arrange
-        UsuarioDTO usuarioDTO = new UsuarioDTO("Ramon@email", "1234", true); 
+        UsuarioDTO usuarioDTO = new UsuarioDTO(1L, "Ramon@email", "1234", true); 
 
         when(usuarioRepo.findById(anyLong())).thenReturn(Optional.empty());
         

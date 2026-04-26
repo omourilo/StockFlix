@@ -11,6 +11,7 @@ package com.stockFlix.usuario;
  * 
  */
 public record UsuarioDTO(
+		long id,
 		String login,
 		String senha,
 		Boolean acessoADM
@@ -18,6 +19,7 @@ public record UsuarioDTO(
 	
 	public UsuarioDTO(Usuario usuario) {
 		this(
+				usuario.getId(),
 				usuario.getLogin(),
 				usuario.getSenha(),
 				usuario.getAcessoADM());
