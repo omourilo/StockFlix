@@ -2,6 +2,9 @@
 package com.stockFlix.config;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +18,7 @@ import com.stockFlix.auth.JwtUtil;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -62,14 +66,23 @@ public class JwtFilter extends OncePerRequestFilter {
                                     FilterChain chain) 
                                     throws ServletException, IOException {
         
-        String header = request.getHeader("Authorization");
+        Cookie[] cookies = request.getCookies();
         
-        if (header == null || !header.startsWith("Bearer ")) {
+        if (cookies == null ) {
             chain.doFilter( request, response);
             return;
         }
         
-        String token = header.substring(7);
+    	String token = Arrays.stream(cookies)
+        		.filter(c -> c.getName().equals("jwt"))
+        		.findFirst()
+        		.map(c -> c.getValue())
+        		.orElse(null);
+    	
+        if (token == null ) {
+            chain.doFilter( request, response);
+            return;
+        }
         String email = jwtUtil.extrairEmail(token);
         
         if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
