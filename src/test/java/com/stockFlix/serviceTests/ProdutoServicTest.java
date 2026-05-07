@@ -44,7 +44,7 @@ class ProdutoServiceTest {
 
         Produto produtoEntity = new Produto(1L, "Produto_1", 1.88F, 1, "Lorem impsum", setorEntity, new ArrayList<>(), new ArrayList<>());
 
-        ProdutoDTO produtoDTO = new ProdutoDTO("Produto_1", 1.88F, 1, "Lorem impsum", 1L);
+        ProdutoDTO produtoDTO = new ProdutoDTO(1L, "Produto_1", 1.88F, 1, "Lorem impsum", 1L);
 
         when(setorRepo.findById(anyLong())).thenReturn(Optional.of(setorEntity)); 
         when(produtoRepo.save(any(Produto.class))).thenReturn(produtoEntity);

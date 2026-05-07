@@ -1,6 +1,7 @@
 package com.stockFlix.movimentacao;
 
 public record MovimentacaoDTO(
+    long id,
     Boolean tipoMovimentacao,
     int qtdMovimentada,
     String data,
@@ -8,6 +9,7 @@ public record MovimentacaoDTO(
 ) {
     public MovimentacaoDTO(Movimentacao movimentacao) {
         this(
+            movimentacao.getId(),
             movimentacao.getTipoMovimentacao(), 
             movimentacao.getQtdMovimentada(),
             movimentacao.getData().toString(),

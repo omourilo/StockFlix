@@ -39,7 +39,7 @@ class EstoqueServiceTest {
     @Test
     void testCreateEstoque() {
         //Arrange
-        EstoqueDTO estoqueDTO = new EstoqueDTO("Estoque_1");
+        EstoqueDTO estoqueDTO = new EstoqueDTO(1L,"Estoque_1");
 
         Estoque estoqueEntity = new Estoque(1L, "Estoque_1", new ArrayList<>());
 
@@ -58,7 +58,7 @@ class EstoqueServiceTest {
         
         Estoque estoqueEntity = new Estoque(1L, "Estoque_1", new ArrayList<>());
 
-        EstoqueDTO estoqueDTO = new EstoqueDTO("Estoque_10");
+        EstoqueDTO estoqueDTO = new EstoqueDTO(1L, "Estoque_10");
 
         when(estoqueRepo.findById(anyLong())).thenReturn(Optional.of(estoqueEntity));
         when(estoqueRepo.save(any(Estoque.class))).thenReturn(estoqueEntity);
@@ -72,7 +72,7 @@ class EstoqueServiceTest {
     @Test 
     void testUpdateEstoqueNaoEncontrado() {
         
-        EstoqueDTO estoqueDTO = new EstoqueDTO("Estoque_10");
+        EstoqueDTO estoqueDTO = new EstoqueDTO(1L,"Estoque_10");
 
         when(estoqueRepo.findById(anyLong())).thenReturn(Optional.empty()); 
         

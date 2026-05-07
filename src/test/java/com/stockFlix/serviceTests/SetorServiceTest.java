@@ -47,7 +47,7 @@ class SetorServiceTest {
 
         Setor setorEntity = new Setor(1L, "Setor_1", new ArrayList<>(), estoqueEntity);
 
-        SetorDTO setorDTO = new SetorDTO("Setor_1", 1L); 
+        SetorDTO setorDTO = new SetorDTO(1L, "Setor_1", 1L); 
 
         when(estoqueRepo.findById(anyLong())).thenReturn(Optional.of(estoqueEntity));
         when(setorRepo.save(any(Setor.class))).thenReturn(setorEntity);
@@ -63,7 +63,7 @@ class SetorServiceTest {
     @Test
     void testCreateSetorEstoqueNaoExiste() {
 
-        SetorDTO setorDTO = new SetorDTO("Setor_1", 1L); 
+        SetorDTO setorDTO = new SetorDTO(1L, "Setor_1", 1L); 
 
         when(estoqueRepo.findById(anyLong())).thenReturn(Optional.empty());
 
@@ -77,7 +77,7 @@ class SetorServiceTest {
 
         Setor setorEntity = new Setor(1L, "Setor_1", new ArrayList<>(), estoqueEntity);
 
-        SetorDTO setorDTO = new SetorDTO("Setor_10", 2L); 
+        SetorDTO setorDTO = new SetorDTO(1L, "Setor_10", 2L); 
 
 
         when(setorRepo.findById(anyLong())).thenReturn(Optional.of(setorEntity));
@@ -96,7 +96,7 @@ class SetorServiceTest {
     void testUpdateSetorEstoqueNaoExiste() {
 
         Setor setorEntity = new Setor(1L, "Setor_1", new ArrayList<>(), new Estoque());
-        SetorDTO setorDTO = new SetorDTO("Setor_1", 1L); 
+        SetorDTO setorDTO = new SetorDTO(1L, "Setor_1", 1L); 
 
         when(setorRepo.findById(anyLong())).thenReturn(Optional.of(setorEntity));
         when(estoqueRepo.findById(anyLong())).thenReturn(Optional.empty());
@@ -108,7 +108,7 @@ class SetorServiceTest {
     @Test
     void testUpdateSetorNaoExiste() {
 
-        SetorDTO setorDTO = new SetorDTO("Setor_1", 1L); 
+        SetorDTO setorDTO = new SetorDTO(1L, "Setor_1", 1L); 
 
         when(setorRepo.findById(anyLong())).thenReturn(Optional.empty());
 
