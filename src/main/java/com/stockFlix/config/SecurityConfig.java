@@ -2,6 +2,7 @@ package com.stockFlix.config;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -41,6 +42,9 @@ public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
     private final UserDetailsService userDetailsService;
+
+    @Value("${cors.allowed-origin}")
+    private String corsAllowedOrigin;   
 
 
     /**
@@ -143,7 +147,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
     	CorsConfiguration config = new CorsConfiguration();
-    	config.setAllowedOrigins(List.of("http://10.0.0.117:3000"));
+    	config.setAllowedOrigins(List.of(corsAllowedOrigin));
     	config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
     	config.setAllowedHeaders(List.of("*"));
     	config.setAllowCredentials(true);
