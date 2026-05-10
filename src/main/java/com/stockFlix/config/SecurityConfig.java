@@ -74,7 +74,7 @@ public class SecurityConfig {
         
         .authorizeHttpRequests(auth -> auth
         	.requestMatchers("/auth/login", "/swagger-ui/**" , "/v3/api-docs/**").permitAll()
-            .requestMatchers(HttpMethod.POST, "/usuarios").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
             .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasRole("ADMIN")
             .requestMatchers(HttpMethod.DELETE, "/usuarios/**").hasRole("ADMIN")
             .requestMatchers(HttpMethod.GET, "/usuarios/**").authenticated()//Só vou colocar as rotas exclusivas do ADMIM, o resto vai ficar authenticated, para o admim conseguir acessar as rotas tbm
