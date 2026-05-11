@@ -1,7 +1,7 @@
 package com.stockFlix.produto;
 
 public record ProdutoDTO(
-    long id,
+    Long id,
     String nome,
     float preco,
     int quantidade,

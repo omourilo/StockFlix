@@ -1,7 +1,7 @@
 package com.stockFlix.estoque;
 
 public record EstoqueDTO(
-    long id,
+    Long id,
     String nome
 ) {
     public EstoqueDTO(Estoque estoque) {

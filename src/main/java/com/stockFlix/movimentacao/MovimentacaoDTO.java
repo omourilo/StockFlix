@@ -1,7 +1,7 @@
 package com.stockFlix.movimentacao;
 
 public record MovimentacaoDTO(
-    long id,
+    Long id,
     Boolean tipoMovimentacao,
     int qtdMovimentada,
     String data,
