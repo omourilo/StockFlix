@@ -47,4 +47,11 @@ public class Previsao {
     @JoinColumn(name = "produto_id")
     private Produto produto;
     
+    
+    public Previsao(PrevisaoDTO previsaoDTO) {
+    	this.qtdPrevista = previsaoDTO.qtdPrevista();
+    	this.inicioPeriodo = LocalDate.parse(previsaoDTO.inicioPeriodo());
+    	this.fimPeriodo = LocalDate.parse(previsaoDTO.fimPeriodo());   	
+    }
+    
 }
