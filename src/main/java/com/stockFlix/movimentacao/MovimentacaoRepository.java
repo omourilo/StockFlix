@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Long> {
     
     List<Movimentacao> findByDataBetween(LocalDate dataInicio, LocalDate dataFim); 
+
+    List<Movimentacao> findByProdutoIdAndDataBetween(long produtoId, LocalDate dataInicio, LocalDate dataFim); 
     
     List<Movimentacao> findAllByProdutoId(long id);
 }

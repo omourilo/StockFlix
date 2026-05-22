@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PrevisaoRepository extends JpaRepository<Previsao, Long> {
 
-	List<Previsao> findByProdutoId(long id);
+	List<Previsao> findAllByProdutoId(long id);
 }

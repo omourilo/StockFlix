@@ -49,7 +49,6 @@ public class Previsao {
     
     
     public Previsao(PrevisaoDTO previsaoDTO) {
-    	this.qtdPrevista = previsaoDTO.qtdPrevista();
     	this.inicioPeriodo = LocalDate.parse(previsaoDTO.inicioPeriodo());
     	this.fimPeriodo = LocalDate.parse(previsaoDTO.fimPeriodo());   	
     }

@@ -13,22 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stockFlix.produto.ProdutoService;
 
 @RestController
 @RequestMapping("/movimentacoes")
 public class MovimentacaoController {
 	
 	private MovimentacaoService movimentacaoService;
-	@SuppressWarnings("unused")
-	private ProdutoService produtoService;
 	
 	
 	public MovimentacaoController(
-			MovimentacaoService movimentacaoService, 
-			ProdutoService produtoService) {
+			MovimentacaoService movimentacaoService) {
 		this.movimentacaoService = movimentacaoService;
-		this.produtoService = produtoService;
 	}
 	
     @PostMapping
