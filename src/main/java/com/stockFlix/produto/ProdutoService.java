@@ -46,7 +46,7 @@ public class ProdutoService {
         produtoEntity.setSetor(setorRepo.findById(produtoDTO.setorId())
                     .orElseThrow(() -> new NotFoundException("Setor não encontrado!")));
         
-        return new ProdutoDTO(produtoEntity);
+        return new ProdutoDTO(produtoRepo.save(produtoEntity));
     }
 
     public ProdutoDTO readProdutoById(long id) {

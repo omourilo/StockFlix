@@ -9,6 +9,8 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.mockito.InjectMocks;
@@ -18,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.stockFlix.excecoes.LoginAlreadyExistsException;
 import com.stockFlix.excecoes.NotFoundException;
+import com.stockFlix.excecoes.PopulatedDeleteException;
+import com.stockFlix.movimentacao.Movimentacao;
 import com.stockFlix.usuario.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -36,7 +40,7 @@ class UsuarioServiceTest {
         // Arrange
         UsuarioDTO usuarioDTO = new UsuarioDTO(1L, "Ramon@email", "1234", true); 
 
-        Usuario usuarioEntity = new Usuario(1L, "Ramon@email", "1234", true);
+        Usuario usuarioEntity = new Usuario(1L, "Ramon@email", "1234", true, new ArrayList<>());
 
         when(usuarioRepo.save(any(Usuario.class))).thenReturn(usuarioEntity);
 
@@ -68,7 +72,7 @@ class UsuarioServiceTest {
         // Arrange
         UsuarioDTO usuarioDTO = new UsuarioDTO(1L, "Ramon@email", "1234", true); 
 
-        Usuario usuarioEntity = new Usuario(1L, "Ramon@email", "1234", true);
+        Usuario usuarioEntity = new Usuario(1L, "Ramon@email", "1234", true, new ArrayList<>());
 
         when(usuarioRepo.findById(anyLong())).thenReturn(Optional.of(usuarioEntity));
         when(passwordEncoder.encode(anyString())).thenReturn("Senha_secreta");
@@ -97,7 +101,7 @@ class UsuarioServiceTest {
 
     @Test
     void testDeleteUsuario() {
-        Usuario usuarioEntity = new Usuario(1L, "Ramon@email", "1234", true);
+        Usuario usuarioEntity = new Usuario(1L, "Ramon@email", "1234", true, new ArrayList<>());
 
         when(usuarioRepo.findById(anyLong())).thenReturn(Optional.of(usuarioEntity));
         doNothing().when(usuarioRepo).deleteById(1L);
@@ -108,13 +112,26 @@ class UsuarioServiceTest {
        
     }
 
-        @Test
+    @Test
     void testDeleteUsuarioNaoEncontrado() {
 
         when(usuarioRepo.findById(anyLong())).thenReturn(Optional.empty());
 
         NotFoundException ex = assertThrows(NotFoundException.class, () -> usuarioService.deleteUsuario(1L));
         System.err.println(ex.getMessage());
+    }
+
+    @Test
+    void testDeleteUsuarioMovimentacaoListPopulado() {
+
+        Movimentacao movimentEntity = new Movimentacao();
+        Usuario usuarioEntity = new Usuario(1L, "Ramon@email", "1234", true, new ArrayList<>(List.of(movimentEntity)));
+
+        when(usuarioRepo.findById(anyLong())).thenReturn(Optional.of(usuarioEntity));
+
+        PopulatedDeleteException ex = assertThrows(PopulatedDeleteException.class, () -> usuarioService.deleteUsuario(1L)); 
+        System.err.println(ex.getMessage());
+
     }
 
 
