@@ -13,4 +13,6 @@ public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Long
     List<Movimentacao> findByProdutoIdAndDataBetween(long produtoId, LocalDate dataInicio, LocalDate dataFim); 
     
     List<Movimentacao> findAllByProdutoId(long id);
+
+    List<Movimentacao> findAllByUsuarioId(long id);
 }

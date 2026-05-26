@@ -3,6 +3,7 @@ package com.stockFlix.movimentacao;
 import java.time.LocalDate;
 
 import com.stockFlix.produto.Produto;
+import com.stockFlix.usuario.Usuario;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -47,6 +48,10 @@ public class Movimentacao {
     @ManyToOne
     @JoinColumn(name = "produto_id")
     private Produto produto; 
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario; 
 
 
     public Movimentacao(MovimentacaoDTO movimentacaoDTO) {

@@ -47,6 +47,16 @@ public class MovimentacaoController {
     		@PathVariable String dataInicial, @PathVariable String dataFinal) {
     	return movimentacaoService.getAllMovimentacaoByData(dataInicial, dataFinal);
     }
+
+    @GetMapping("/produto/{id}")
+    public List<MovimentacaoDTO> getAllMovimentacoesByProdutoId(@PathVariable long id) {
+    	return movimentacaoService.getAllMovimentacaoByProdutoId(id);
+    }
+
+    @GetMapping("/usuario/{id}")
+    public List<MovimentacaoDTO> getAllMovimentacoesByUsuarioId(@PathVariable long id) {
+    	return movimentacaoService.getAllMovimentacaoByUsuarioId(id);
+    }
     
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

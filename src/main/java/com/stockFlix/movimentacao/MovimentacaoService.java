@@ -8,19 +8,24 @@ import org.springframework.stereotype.Service;
 import com.stockFlix.excecoes.NotFoundException;
 import com.stockFlix.produto.Produto;
 import com.stockFlix.produto.ProdutoRepository;
+import com.stockFlix.usuario.Usuario;
+import com.stockFlix.usuario.UsuarioRepository;
 
 @Service
 public class MovimentacaoService {
     
     private final MovimentacaoRepository movimentacaoRepo;
     private final ProdutoRepository produtoRepo;
+    private final UsuarioRepository usuarioRepo;
 
     public MovimentacaoService(
         MovimentacaoRepository movimentacaoRepo,
-        ProdutoRepository produtoRepo
+        ProdutoRepository produtoRepo,
+        UsuarioRepository usuarioRepo
     ) {
         this.movimentacaoRepo = movimentacaoRepo;
         this.produtoRepo = produtoRepo;
+        this.usuarioRepo= usuarioRepo;
     }
 
     public MovimentacaoDTO createMovimentacao(MovimentacaoDTO movimentDTO) {
@@ -28,8 +33,11 @@ public class MovimentacaoService {
         Produto produtoEntity = produtoRepo.findById(movimentDTO.produtoId())
                 .orElseThrow(() -> new NotFoundException("Produto não encontrado!"));
 
+        Usuario usuarioEntity = usuarioRepo.findById(movimentDTO.usuarioId())
+                .orElseThrow(() -> new NotFoundException("Usuario não encontrado!"));
 
         movimentEntity.setProduto(produtoEntity);
+        movimentEntity.setUsuario(usuarioEntity);
         
         //Se for true é adição
         if (movimentEntity.getTipoMovimentacao()) {
@@ -61,6 +69,14 @@ public class MovimentacaoService {
     			.stream()
     			.map(movi -> new MovimentacaoDTO(movi))
     			.toList();
+    }
+
+    public List<MovimentacaoDTO> getAllMovimentacaoByUsuarioId(long id) {
+    	return movimentacaoRepo
+    			.findAllByUsuarioId(id)
+    			.stream()
+    			.map(movi -> new MovimentacaoDTO(movi))
+    			.toList();        
     }
     
     public List<MovimentacaoDTO> getAllMovimentacaoByData(String dataInicio, String dataFim) {

@@ -10,11 +10,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.stockFlix.movimentacao.Movimentacao;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
@@ -56,6 +61,10 @@ public class Usuario implements UserDetails{
 	 */
 	@Column(nullable = false)
 	private Boolean acessoADM;
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Movimentacao> movimentacoes = new ArrayList<>();
 	
 	public Usuario(UsuarioDTO usuarioDTO) {
 		this.login = usuarioDTO.login();

@@ -5,7 +5,8 @@ public record MovimentacaoDTO(
     Boolean tipoMovimentacao,
     int qtdMovimentada,
     String data,
-    Long produtoId
+    Long produtoId,
+    Long usuarioId
 ) {
     public MovimentacaoDTO(Movimentacao movimentacao) {
         this(
@@ -13,7 +14,8 @@ public record MovimentacaoDTO(
             movimentacao.getTipoMovimentacao(), 
             movimentacao.getQtdMovimentada(),
             movimentacao.getData().toString(),
-            movimentacao.getProduto() != null ? movimentacao.getProduto().getId() : null
+            movimentacao.getProduto() != null ? movimentacao.getProduto().getId() : null,
+            movimentacao.getUsuario() != null ? movimentacao.getUsuario().getId() : null
         );
     }
 } 
