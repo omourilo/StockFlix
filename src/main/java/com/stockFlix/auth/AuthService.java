@@ -60,8 +60,8 @@ public class AuthService {
         ResponseCookie cookie = ResponseCookie.from("jwt", token)
                                         .httpOnly(true)
                                         .path("/")
-                                        .secure(false)              
-                                        .sameSite("Lax")
+                                        .secure(true)              
+                                        .sameSite("None")
                                         .build();
         
         response.addHeader("Set-Cookie", cookie.toString());
