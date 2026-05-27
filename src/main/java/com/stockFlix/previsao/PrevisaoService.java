@@ -77,7 +77,7 @@ public void deletePrevisao(long id) {
 
 public int calculoPrevisao(long produtoId, LocalDate dataInicio, LocalDate dataFim) {
     ArrayList<Integer> qtdsMovimentadas = new ArrayList<>();
-    movimentacaoRepo.findByProdutoIdAndDataBetween(produtoId, dataInicio, dataFim)
+    movimentacaoRepo.findByProdutoIdAndTipoMovimentacaoAndDataBetween(produtoId, false, dataInicio, dataFim)
             .stream()
             .forEach(
                 m -> qtdsMovimentadas.add(m.getQtdMovimentada()));
