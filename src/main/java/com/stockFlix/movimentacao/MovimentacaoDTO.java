@@ -1,9 +1,12 @@
 package com.stockFlix.movimentacao;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public record MovimentacaoDTO(
     Long id,
     Boolean tipoMovimentacao,
     int qtdMovimentada,
+    @Schema(example = "2025-05-27")
     String data,
     Long produtoId,
     Long usuarioId

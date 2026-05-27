@@ -2,7 +2,7 @@ package com.stockFlix.previsao;
 
 public record PrevisaoDTO(
 		Long id,
-		int qtdPrevista,
+		Integer qtdPrevista,
 		String inicioPeriodo,
 		String fimPeriodo,
 		String criadoEm,
