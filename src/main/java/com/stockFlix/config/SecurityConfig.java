@@ -73,6 +73,7 @@ public class SecurityConfig {
         .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         
         .authorizeHttpRequests(auth -> auth
+        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
         	.requestMatchers("/auth/login", "/swagger-ui/**" , "/v3/api-docs/**").permitAll()
             .requestMatchers(HttpMethod.POST, "/usuarios").hasRole("ADMIN")	
             .requestMatchers(HttpMethod.PUT, "/usuarios/**").hasRole("ADMIN")
