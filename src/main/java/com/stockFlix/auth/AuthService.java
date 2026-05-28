@@ -5,6 +5,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import com.stockFlix.usuario.Usuario;
 import com.stockFlix.usuario.UsuarioRepository;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -41,7 +42,7 @@ public class AuthService {
      * @param response resposta HTTP (para adicionar o cookie)
      * @return token JWT gerado
      */
-    public String login(LoginDTO loginDTO, HttpServletResponse response) {
+    public LoginResponseDTO login(LoginDTO loginDTO, HttpServletResponse response) {
 
 
         try {
@@ -52,8 +53,9 @@ public class AuthService {
             throw new RuntimeException("Credenciais invalidas", e);
         }
         
-        String role = (usuarioRepository.findByLogin(loginDTO.login())
-        				.orElseThrow(() ->  new RuntimeException("Usuario não encontrado.")).getAcessoADM())? "ADMIN" : "COMUM";
+        Usuario usuarioEntity = usuarioRepository.findByLogin(loginDTO.login())
+        				.orElseThrow(() ->  new RuntimeException("Usuario não encontrado."));
+        String role = usuarioEntity.getAcessoADM()? "ADMIN" : "COMUM";
     
         String token = jwtUtil.gerarToken(loginDTO.login(), role);
 
@@ -66,7 +68,7 @@ public class AuthService {
         
         response.addHeader("Set-Cookie", cookie.toString());
         
-        return token;
+        return new LoginResponseDTO(usuarioEntity);
     }
     
 }

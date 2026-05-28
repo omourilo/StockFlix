@@ -1,5 +1,6 @@
 package com.stockFlix.auth;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,9 +29,7 @@ public class AuthController {
 	 * @return ResponseEntity resposta da requisição, é esperado resposta 200
 	 */
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {
-
-		authService.login(loginDTO, response);
-		return ResponseEntity.ok("Login realizado com sucesso!");
+	public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(authService.login(loginDTO, response));
 	}
 }
