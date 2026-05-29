@@ -62,7 +62,7 @@ public class AuthService {
         ResponseCookie cookie = ResponseCookie.from("jwt", token)
                                         .httpOnly(true)
                                         .path("/")
-                                        //.secure(true)              
+                                        .secure(true)              
                                         .sameSite("None")
                                         .build();
         
