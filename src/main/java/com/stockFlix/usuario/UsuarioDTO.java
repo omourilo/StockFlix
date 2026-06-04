@@ -15,7 +15,8 @@ public record UsuarioDTO(
 		String login,
 		@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 		String senha,
-		Boolean acessoADM
+		Boolean acessoADM,
+		Boolean ativo
 		) {
 	
 	public UsuarioDTO(Usuario usuario) {
@@ -23,7 +24,8 @@ public record UsuarioDTO(
 				usuario.getId(),
 				usuario.getLogin(),
 				usuario.getSenha(),
-				usuario.getAcessoADM());
+				usuario.getAcessoADM(),
+				usuario.getAtivo());
 	}
 
 }

@@ -76,15 +76,16 @@ public class UsuarioController {
 		return ResponseEntity.ok().body(usuarioService.updateUsuario(id, usuarioDTO));
 	}
 	
-    /**
-     * Remove um usuário pelo ID.
-     *
-     * @param id identificador do usuário
-     */
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/desativar/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) 
-	public void deleteUsuario(@PathVariable Long id) {
-		usuarioService.deleteUsuario(id);
+	public void desativarUsuario(@PathVariable Long id) {
+		usuarioService.desativarUsuario(id);
+	}
+	
+	@PutMapping("/ativar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) 
+	public void ativarUsuario(@PathVariable Long id) {
+		usuarioService.ativarUsuario(id);
 	}
 
 }

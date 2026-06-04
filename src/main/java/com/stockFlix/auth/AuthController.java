@@ -2,6 +2,7 @@ package com.stockFlix.auth;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,5 +32,10 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {
 		return ResponseEntity.status(HttpStatus.ACCEPTED).body(authService.login(loginDTO, response));
+	}
+	
+	@GetMapping("/me")
+	public ResponseEntity<LoginResponseDTO> getCredentials() {
+		return ResponseEntity.status(HttpStatus.OK).body(authService.getCredenciais());
 	}
 }

@@ -3,6 +3,7 @@ package com.stockFlix.auth;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.stockFlix.usuario.Usuario;
@@ -44,6 +45,11 @@ public class AuthService {
      */
     public LoginResponseDTO login(LoginDTO loginDTO, HttpServletResponse response) {
 
+    	
+        Usuario usuarioEntity = usuarioRepository.findByLogin(loginDTO.login())
+				.orElseThrow(() ->  new RuntimeException("Usuario não encontrado."));
+
+        if (!usuarioEntity.getAtivo()) throw new RuntimeException("Credenciais invalido!");
 
         try {
             authenticationManager.authenticate(
@@ -53,8 +59,7 @@ public class AuthService {
             throw new RuntimeException("Credenciais invalidas", e);
         }
         
-        Usuario usuarioEntity = usuarioRepository.findByLogin(loginDTO.login())
-        				.orElseThrow(() ->  new RuntimeException("Usuario não encontrado."));
+        
         String role = usuarioEntity.getAcessoADM()? "ADMIN" : "COMUM";
     
         String token = jwtUtil.gerarToken(loginDTO.login(), role);
@@ -71,4 +76,15 @@ public class AuthService {
         return new LoginResponseDTO(usuarioEntity);
     }
     
+    
+    public LoginResponseDTO getCredenciais() {
+    	
+    	String login = SecurityContextHolder.getContext().getAuthentication().getName();
+    	
+    	return new LoginResponseDTO(
+    			usuarioRepository.findByLogin(login)
+						.orElseThrow(() ->  new RuntimeException("Usuario não encontrado.")));
+    	
+        
+    }
 }

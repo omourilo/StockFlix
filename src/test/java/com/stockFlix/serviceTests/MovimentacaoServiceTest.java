@@ -47,7 +47,7 @@ public class MovimentacaoServiceTest {
     @Test
     void testCreateMovimentacaoAdicao() {
 
-        Usuario usuarioEntity = new Usuario(1L, "Teste", "senha", true,  new ArrayList<>());
+        Usuario usuarioEntity = new Usuario(1L, "Teste", "senha", true, true, new ArrayList<>());
 
         Estoque estoqueEntity = new Estoque(1L, "Estoque_1" , new ArrayList<>()); 
         Setor setorEntity = new Setor(1L, "Setor_1", new ArrayList<>(), estoqueEntity);
@@ -77,7 +77,7 @@ public class MovimentacaoServiceTest {
     @Test
     void testCreateMovimentacaoSubtracao() {
 
-        Usuario usuarioEntity = new Usuario(1L, "Teste", "senha", true,  new ArrayList<>());
+        Usuario usuarioEntity = new Usuario(1L, "Teste", "senha", true, true,  new ArrayList<>());
 
         Estoque estoqueEntity = new Estoque(1L, "Estoque_1" , new ArrayList<>()); 
         Setor setorEntity = new Setor(1L, "Setor_1", new ArrayList<>(), estoqueEntity);
@@ -128,7 +128,7 @@ public class MovimentacaoServiceTest {
 
     @Test
     void testCreateMovimentacaoEstoqueInsuficiente() {
-        Usuario usuarioEntity = new Usuario(1L, "Teste", "senha", true,  new ArrayList<>());
+        Usuario usuarioEntity = new Usuario(1L, "Teste", "senha", true, true,  new ArrayList<>());
 
         Estoque estoqueEntity = new Estoque(1L, "Estoque_1" , new ArrayList<>()); 
         Setor setorEntity = new Setor(1L, "Setor_1", new ArrayList<>(), estoqueEntity);

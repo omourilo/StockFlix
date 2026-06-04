@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.stockFlix.excecoes.LoginAlreadyExistsException;
 import com.stockFlix.excecoes.NotFoundException;
-import com.stockFlix.excecoes.PopulatedDeleteException;
 
 import jakarta.transaction.Transactional;
 
@@ -134,7 +133,7 @@ public class UsuarioService {
 	 * @param id do usuario a ser deletado
 	 * @throws NotFoundException caso a busca não encontre resultado
 	 */
-	public void deleteUsuario(Long id) {
+	public void desativarUsuario(Long id) {
 		
 		/**
 		 * Para parar a execução de delete, 
@@ -144,12 +143,16 @@ public class UsuarioService {
 		Usuario usuarioEntity = usuarioRepository.findById(id)
 						.orElseThrow(() -> new NotFoundException("Usuario não encontrado!!"));
 
-		if (!usuarioEntity.getMovimentacoes().isEmpty()) {
-            throw new PopulatedDeleteException(
-                "Impossivel deletar, usuario com " + usuarioEntity.getMovimentacoes().size() + " movimentações que serão afetadas");
-        }
-		
-		usuarioRepository.deleteById(id);
+		usuarioEntity.setAtivo(false);
+		usuarioRepository.save(usuarioEntity);
+	}
+	
+	public void ativarUsuario(Long id) {
+		Usuario usuarioEntity = usuarioRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException("Usuario não encontrado!!"));
+
+		usuarioEntity.setAtivo(true);
+		usuarioRepository.save(usuarioEntity);
 	}
 	
 }

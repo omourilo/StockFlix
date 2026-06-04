@@ -37,10 +37,11 @@ public class UsuarioDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 		
-		Usuario usuario = usuarioRepo.findByLogin(login)
+		Usuario usuarioEntity = usuarioRepo.findByLogin(login)
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario não encontrado para:" +login));
+		if (!usuarioEntity.getAtivo()) throw new RuntimeException("Usuario invalido!");
 		
-		return usuario;
+		return usuarioEntity;
 	}
 	
 }

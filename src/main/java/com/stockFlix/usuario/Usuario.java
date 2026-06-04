@@ -61,6 +61,8 @@ public class Usuario implements UserDetails{
 	 */
 	@Column(nullable = false)
 	private Boolean acessoADM;
+	@Column(nullable = false)
+	private Boolean ativo; //true para ativo, false para inativo
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -70,6 +72,7 @@ public class Usuario implements UserDetails{
 		this.login = usuarioDTO.login();
 		this.senha = usuarioDTO.senha();
 		this.acessoADM = usuarioDTO.acessoADM();
+		this.ativo = usuarioDTO.ativo();
 	}
 
 	@Override
