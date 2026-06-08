@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
                 .body("Global Error: " + ex.getMessage());
     }
     
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(DisabledEntityException.class)
     public ResponseEntity<String> handleIllegalArgument(DisabledEntityException ex) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
