@@ -35,4 +35,11 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body("Global Error: " + ex.getMessage());
     }
+    
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> handleIllegalArgument(RuntimeException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body("Global Error: " + ex.getMessage());
+    }
 }
