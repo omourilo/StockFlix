@@ -44,9 +44,15 @@ public class EstoqueController {
         return ResponseEntity.ok().body(estoqueService.updateEstoque(id, estoqueDTO));
     }
 
-    @DeleteMapping("/{id}")
+	@DeleteMapping("/desativar/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) 
-    public void deleteEstoque(@PathVariable long id) {
-        estoqueService.deleteEstoque(id);
-    }
+	public void desativarEstoque(@PathVariable Long id) {
+		estoqueService.desativarEstoque(id);
+	}
+	
+	@PutMapping("/ativar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) 
+	public void ativarEstoque(@PathVariable Long id) {
+		estoqueService.ativarEstoque(id);
+	}
 }

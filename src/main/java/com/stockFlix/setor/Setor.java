@@ -37,6 +37,10 @@ public class Setor {
 	@Column(nullable = false)
 	private String nome;
 	
+	@Column(nullable = false)
+	private Boolean ativo; //true para ativo, false para inativo
+
+	
 	@OneToMany(mappedBy = "setor", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Produto> produtos = new ArrayList<>();
@@ -47,6 +51,7 @@ public class Setor {
 
 	public Setor(SetorDTO setorDTO) {
 		this.nome = setorDTO.nome();
+		this.ativo = true;
 	}
 	
 

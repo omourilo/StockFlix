@@ -58,9 +58,15 @@ public class SetorController {
         return ResponseEntity.ok().body(setorService.updateSetor(id, setorDTO));
     }
 
-    @DeleteMapping("/{id}")
+	@DeleteMapping("/desativar/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) 
-    public void deleteSetor(@PathVariable long id) {
-        setorService.deleteSetor(id);
-    }
+	public void desativarSetor(@PathVariable Long id) {
+		setorService.desativarSetor(id);
+	}
+	
+	@PutMapping("/ativar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) 
+	public void ativarSetor(@PathVariable Long id) {
+		setorService.ativarSetor(id);
+	}
 }

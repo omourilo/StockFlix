@@ -6,6 +6,7 @@ public record ProdutoDTO(
     float preco,
     int quantidade,
     String descricao,
+    Boolean ativo,
     Long setorId
 ) {
     public ProdutoDTO(Produto produto) {
@@ -15,6 +16,7 @@ public record ProdutoDTO(
             produto.getPreco(),
             produto.getQuantidade(),
             produto.getDescricao(),
+            produto.getAtivo(),
             produto.getSetor() != null ? produto.getSetor().getId() : null
         );
     }

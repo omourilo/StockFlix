@@ -57,9 +57,16 @@ public class ProdutoController {
         return ResponseEntity.ok().body(produtoService.updateProduto(id, produtoDTO));
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProduto(@PathVariable long id) {
-        produtoService.deleteProduto(id);
-    }
+	@DeleteMapping("/desativar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) 
+	public void desativarProduto(@PathVariable Long id) {
+		produtoService.desativarProduto(id);
+	}
+	
+	@PutMapping("/ativar/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) 
+	public void ativarUsuario(@PathVariable Long id) {
+		produtoService.ativarProduto(id);
+	}
+    
 }

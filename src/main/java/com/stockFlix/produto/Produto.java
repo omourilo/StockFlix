@@ -54,6 +54,9 @@ public class Produto {
 	@Size(max = 300)
 	private String descricao;
 	
+	@Column(nullable = false)
+	private Boolean ativo; //true para ativo, false para inativo
+	
 	@ManyToOne
 	@JoinColumn(name = "setor_id")
 	private Setor setor;
@@ -71,6 +74,7 @@ public class Produto {
 		this.preco = produtoDTO.preco();
 		//deixar sem quantidade para iniciar o produto com 0 
 		this.descricao = produtoDTO.descricao();
+		this.ativo = true;
 	}
 
 	public int adicionarQuantidade(int qtdAdicionada) {

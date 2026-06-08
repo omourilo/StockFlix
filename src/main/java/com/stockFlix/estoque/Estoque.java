@@ -37,9 +37,13 @@ public class Estoque {
 	@OneToMany(mappedBy = "estoque" , cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Setor> setores = new ArrayList<>();
+	
+	@Column(nullable = false)
+	private Boolean ativo; //true para ativo, false para inativo
 
 	public Estoque(EstoqueDTO estoqueDTO) {
-		this.nome = estoqueDTO.nome(); 
+		this.nome = estoqueDTO.nome();
+		this.ativo = true;
 	}
 	
 	

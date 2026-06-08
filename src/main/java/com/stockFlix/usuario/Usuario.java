@@ -72,7 +72,7 @@ public class Usuario implements UserDetails{
 		this.login = usuarioDTO.login();
 		this.senha = usuarioDTO.senha();
 		this.acessoADM = usuarioDTO.acessoADM();
-		this.ativo = usuarioDTO.ativo();
+		this.ativo = true;
 	}
 
 	@Override

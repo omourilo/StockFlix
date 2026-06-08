@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.stockFlix.excecoes.NotFoundException;
-import com.stockFlix.excecoes.PopulatedDeleteException;
 import com.stockFlix.setor.SetorRepository;
 
 import jakarta.transaction.Transactional;
@@ -69,14 +68,20 @@ public class ProdutoService {
     }
 
 
-    public void deleteProduto(long id) {
-        Produto produtoEntity = produtoRepo.findById(id)
-                    .orElseThrow(() -> new NotFoundException("Produto não encontrado!"));
-        if (!produtoEntity.getMovimentacoes().isEmpty() || !produtoEntity.getPrevisoes().isEmpty()) {
-            throw new PopulatedDeleteException(
-                "Impossivel deletar, produto com " + produtoEntity.getMovimentacoes().size() + 
-                " movimentações e " + produtoEntity.getPrevisoes().size() + " previsões que serão afetados");
-        }
-        produtoRepo.deleteById(id);
-    }
+	public void desativarProduto(Long id) {
+
+		Produto ProdutoEntity = produtoRepo.findById(id)
+						.orElseThrow(() -> new NotFoundException("Usuario não encontrado!!"));
+
+		ProdutoEntity.setAtivo(false);
+		produtoRepo.save(ProdutoEntity);
+	}
+	
+	public void ativarProduto(Long id) {
+		Produto ProdutoEntity = produtoRepo.findById(id)
+				.orElseThrow(() -> new NotFoundException("Usuario não encontrado!!"));
+
+		ProdutoEntity.setAtivo(true);
+		produtoRepo.save(ProdutoEntity);
+	}
 }

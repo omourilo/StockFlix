@@ -123,23 +123,9 @@ public class UsuarioService {
 				.findById(id)
 				.orElseThrow(() -> new NotFoundException("Usuario não encontrado!!")));
 	}
-	
-	/**
-	 * Método para deletar um usuario em específico.
-	 * 
-	 * <p>Deleta um usuario em específico do banco, usando como referencia o ID passado.
-	 * Caso a busca não tenha retorno, lança a {@code NotFoundException}.</p>
-	 * 
-	 * @param id do usuario a ser deletado
-	 * @throws NotFoundException caso a busca não encontre resultado
-	 */
+
 	public void desativarUsuario(Long id) {
-		
-		/**
-		 * Para parar a execução de delete, 
-		 * ele já faz uma busca com {@code .orElseThrow} 
-		 * para lançar a exceção caso não encotre o usuario e parar a execução
-		 */
+
 		Usuario usuarioEntity = usuarioRepository.findById(id)
 						.orElseThrow(() -> new NotFoundException("Usuario não encontrado!!"));
 
