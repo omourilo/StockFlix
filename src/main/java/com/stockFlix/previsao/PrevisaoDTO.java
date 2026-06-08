@@ -6,7 +6,8 @@ public record PrevisaoDTO(
 		String inicioPeriodo,
 		String fimPeriodo,
 		String criadoEm,
-		Long produtoId
+		Long produtoId,
+		String produtoNome
 		) {
 	public PrevisaoDTO(Previsao previsao) {
 		this(
@@ -15,7 +16,8 @@ public record PrevisaoDTO(
 				previsao.getInicioPeriodo().toString(),
 				previsao.getFimPeriodo().toString(),
 				previsao.getCriadoEm().toString(),
-				previsao.getProduto() != null ? previsao.getProduto().getId() : null
+				previsao.getProduto() != null ? previsao.getProduto().getId() : null,
+				previsao.getProduto() != null ? previsao.getProduto().getNome() : null
 				);
 	}
 

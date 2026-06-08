@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.stockFlix.excecoes.NotFoundException;
+import com.stockFlix.setor.Setor;
 import com.stockFlix.setor.SetorRepository;
 
 import jakarta.transaction.Transactional;
@@ -27,8 +28,10 @@ public class ProdutoService {
         Produto produtoEntity = new Produto(produtoDTO);
 
         if (produtoDTO.setorId() != null) {
-            produtoEntity.setSetor(setorRepo.findById(produtoDTO.setorId())
-                    .orElseThrow(() -> new NotFoundException("Setor não encontrado!")));
+        	Setor setorEntity = setorRepo.findById(produtoDTO.setorId())
+                    .orElseThrow(() -> new NotFoundException("Setor não encontrado!"));
+        	if (!setorEntity.getAtivo()) throw new RuntimeException("Setor inativo!!");
+            produtoEntity.setSetor(setorEntity);
         }
 
         return new ProdutoDTO(produtoRepo.save(produtoEntity));

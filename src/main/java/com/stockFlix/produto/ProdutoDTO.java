@@ -7,7 +7,8 @@ public record ProdutoDTO(
     int quantidade,
     String descricao,
     Boolean ativo,
-    Long setorId
+    Long setorId,
+    String setorNome
 ) {
     public ProdutoDTO(Produto produto) {
         this(
@@ -17,7 +18,8 @@ public record ProdutoDTO(
             produto.getQuantidade(),
             produto.getDescricao(),
             produto.getAtivo(),
-            produto.getSetor() != null ? produto.getSetor().getId() : null
+            produto.getSetor() != null ? produto.getSetor().getId() : null,
+            produto.getSetor() != null ? produto.getSetor().getNome() : null
         );
     }
 }

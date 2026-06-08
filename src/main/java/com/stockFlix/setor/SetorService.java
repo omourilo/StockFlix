@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.stockFlix.estoque.Estoque;
 import com.stockFlix.estoque.EstoqueRepository;
 import com.stockFlix.excecoes.NotFoundException;
 
@@ -27,10 +28,11 @@ public class SetorService {
 	
 	public SetorDTO createSetor(SetorDTO setorDTO) {
 		Setor setorEntity = new Setor(setorDTO); 
-		
 		if(setorDTO.estoqueId() != null) {
-			setorEntity.setEstoque(estoqueRepo.findById(setorDTO.estoqueId())
-					.orElseThrow(() -> new NotFoundException("Estoque não encontrado")));
+			Estoque estoqueEntity = estoqueRepo.findById(setorDTO.estoqueId())
+					.orElseThrow(() -> new NotFoundException("Estoque não encontrado"));
+			if (!estoqueEntity.getAtivo()) throw new RuntimeException("Estoque inativo!!");
+			setorEntity.setEstoque(estoqueEntity);
 		}
 		
 		return new SetorDTO(setorRepo.save(setorEntity));		
