@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.stockFlix.excecoes.DisabledEntityException;
 import com.stockFlix.excecoes.NotFoundException;
 import com.stockFlix.setor.Setor;
 import com.stockFlix.setor.SetorRepository;
@@ -30,7 +31,7 @@ public class ProdutoService {
         if (produtoDTO.setorId() != null) {
         	Setor setorEntity = setorRepo.findById(produtoDTO.setorId())
                     .orElseThrow(() -> new NotFoundException("Setor não encontrado!"));
-        	if (!setorEntity.getAtivo()) throw new RuntimeException("Setor inativo!!");
+        	if (!setorEntity.getAtivo()) throw new DisabledEntityException("Setor inativo!!");
             produtoEntity.setSetor(setorEntity);
         }
 

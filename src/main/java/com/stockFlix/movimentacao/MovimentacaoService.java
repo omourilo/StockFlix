@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.stockFlix.excecoes.DisabledEntityException;
 import com.stockFlix.excecoes.NotFoundException;
 import com.stockFlix.produto.Produto;
 import com.stockFlix.produto.ProdutoRepository;
@@ -32,9 +33,11 @@ public class MovimentacaoService {
         Movimentacao movimentEntity = new Movimentacao(movimentDTO);
         Produto produtoEntity = produtoRepo.findById(movimentDTO.produtoId())
                 .orElseThrow(() -> new NotFoundException("Produto não encontrado!"));
+        if (!produtoEntity.getAtivo()) throw new DisabledEntityException("Produto inativo!!");
 
         Usuario usuarioEntity = usuarioRepo.findById(movimentDTO.usuarioId())
                 .orElseThrow(() -> new NotFoundException("Usuario não encontrado!"));
+        if (!usuarioEntity.getAtivo()) throw new DisabledEntityException("Usuario inativo!!");
 
         movimentEntity.setProduto(produtoEntity);
         movimentEntity.setUsuario(usuarioEntity);

@@ -6,6 +6,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.stockFlix.excecoes.DisabledEntityException;
+import com.stockFlix.excecoes.NotFoundException;
 import com.stockFlix.usuario.Usuario;
 import com.stockFlix.usuario.UsuarioRepository;
 
@@ -47,9 +49,9 @@ public class AuthService {
 
     	
         Usuario usuarioEntity = usuarioRepository.findByLogin(loginDTO.login())
-				.orElseThrow(() ->  new RuntimeException("Usuario não encontrado."));
+				.orElseThrow(() ->  new NotFoundException("Usuario não encontrado."));
 
-        if (!usuarioEntity.getAtivo()) throw new RuntimeException("Credenciais invalido!");
+        if (!usuarioEntity.getAtivo()) throw new DisabledEntityException("Credenciais invalido!");
 
         try {
             authenticationManager.authenticate(
@@ -83,7 +85,7 @@ public class AuthService {
     	
     	return new LoginResponseDTO(
     			usuarioRepository.findByLogin(login)
-						.orElseThrow(() ->  new RuntimeException("Usuario não encontrado.")));
+						.orElseThrow(() ->  new NotFoundException("Usuario não encontrado.")));
     	
         
     }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.stockFlix.excecoes.DisabledEntityException;
 import com.stockFlix.excecoes.NotFoundException;
 import com.stockFlix.movimentacao.MovimentacaoRepository;
 import com.stockFlix.produto.Produto;
@@ -33,6 +34,7 @@ public class PrevisaoService {
 
     Produto produtoEntity = produtoRepo.findById(previsaoDTO.produtoId())
                 .orElseThrow(() -> new NotFoundException("Produto não encontrado!"));
+    if (!produtoEntity.getAtivo()) throw new DisabledEntityException("Produto inativo!!");
 
     previsaoEntity.setProduto(produtoEntity);
 
