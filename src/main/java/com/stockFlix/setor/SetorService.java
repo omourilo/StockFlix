@@ -8,6 +8,8 @@ import com.stockFlix.estoque.Estoque;
 import com.stockFlix.estoque.EstoqueRepository;
 import com.stockFlix.excecoes.DisabledEntityException;
 import com.stockFlix.excecoes.NotFoundException;
+import com.stockFlix.produto.Produto;
+import com.stockFlix.produto.ProdutoRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -17,14 +19,17 @@ public class SetorService {
 	
 	private final SetorRepository setorRepo;
 	private final EstoqueRepository estoqueRepo;
+	private final ProdutoRepository produtoRepo;
 	
 	
 	public SetorService(
 			SetorRepository setorRepo, 
-			EstoqueRepository estoqueRepo
+			EstoqueRepository estoqueRepo,
+			ProdutoRepository produtoRepo
 		) {
 		this.setorRepo = setorRepo;
 		this.estoqueRepo = estoqueRepo;
+		this.produtoRepo = produtoRepo;
 	}
 	
 	public SetorDTO createSetor(SetorDTO setorDTO) {
@@ -70,18 +75,28 @@ public class SetorService {
 				.toList();
 	}
 	
+	@Transactional
 	public void desativarSetor(Long id) {
 		Setor setorEntity = setorRepo.findById(id)
 						.orElseThrow(() -> new NotFoundException("Usuario não encontrado!!"));
-
+		
+		List<Produto> produtos = produtoRepo.findAllBySetorId(id);
+		produtos.stream().forEach(p -> p.setAtivo(false));
+		produtoRepo.saveAll(produtos);
+		
 		setorEntity.setAtivo(false);
 		setorRepo.save(setorEntity);
 	}
 	
+	@Transactional
 	public void ativarSetor(Long id) {
 		Setor setorEntity = setorRepo.findById(id)
 				.orElseThrow(() -> new NotFoundException("Usuario não encontrado!!"));
 
+		List<Produto> produtos = produtoRepo.findAllBySetorId(id);
+		produtos.stream().forEach(p -> p.setAtivo(true));
+		produtoRepo.saveAll(produtos);
+		
 		setorEntity.setAtivo(true);
 		setorRepo.save(setorEntity);
 	}

@@ -14,23 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stockFlix.estoque.EstoqueService;
-
 @RestController
 @RequestMapping("/setores")
 public class SetorController {
 	
 	private SetorService setorService;
-	@SuppressWarnings("unused")
-    private final EstoqueService estoqueService;
 	
 	
 	public SetorController(
-			SetorService setorService, 
-			EstoqueService estoqueService
+			SetorService setorService
 		) {
 		this.setorService = setorService;
-		this.estoqueService = estoqueService;
 	}
 	
     @GetMapping
