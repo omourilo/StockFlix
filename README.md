@@ -22,7 +22,40 @@ O StockFlix é um sistema desktop voltado ao controle e administração de estoq
 - Gestores de estoque
 
 ## Funcionalidades
+### Gestão de Estoques
 
+- Cadastro de estoques;
+- Cadastro de setores;
+- Organização hierárquica dos produtos;
+- Controle de produtos ativos e inativos.
+
+### Gestão de Produtos
+
+- Cadastro de produtos;
+- Atualização de informações;
+- Controle de quantidade disponível;
+- Consulta de produtos por setor.
+
+### Movimentações
+
+- Registro de entradas;
+- Registro de saídas;
+- Histórico completo de movimentações;
+- Identificação do usuário responsável por cada movimentação.
+
+### Previsão de Demanda
+
+- Geração de previsões utilizando histórico de movimentações;
+- Análise de consumo ao longo de períodos definidos;
+- Apoio à reposição de estoque.
+
+### Controle de Usuários
+
+- Autenticação;
+- Controle de permissões;
+- Perfis administrativos e operacionais.
+
+---
 ### Requisitos Funcionais
 
 | ID | Descrição |
@@ -50,16 +83,22 @@ O StockFlix é um sistema desktop voltado ao controle e administração de estoq
 
 ## Perfis de Acesso
 
-### Administrador (ADM)
-- Cadastrar, adicionar e remover produtos
-- Atualizar estoque
-- Todas as permissões de Usuário
+### Administrador
 
-### Usuário (Funcionário)
-- Registrar entradas e saídas de produtos
-- Listar produtos em estoque
-- Consultar histórico de movimentações
-- Visualizar previsões de demanda
+- Gerenciar usuários;
+- Gerenciar estoques;
+- Gerenciar setores;
+- Gerenciar produtos;
+- Registrar movimentações;
+- Consultar previsões;
+- Consultar históricos.
+
+### Usuário
+
+- Consultar produtos;
+- Registrar movimentações;
+- Consultar histórico;
+- Consultar previsões.
 
 ## Arquitetura e Modelagem
 
