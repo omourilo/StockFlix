@@ -1,0 +1,104 @@
+
+package com.stockFlix.config;
+
+import java.io.IOException;
+import java.util.Arrays;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.stockFlix.auth.JwtUtil;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+/**
+ * Filtro responsável por interceptar requisições HTTP e validar o token JWT.
+ * 
+ * <p>Essa classe é executada a cada requisição e verifica se existe um token
+ * de autenticação no cabeçalho da requisição.</p>
+ * 
+ * <p>Se o token for válido, o usuário é autenticado automaticamente no
+ * contexto de segurança do Spring.</p>
+ * 
+ * <p>Extende {@link OncePerRequestFilter}, garantindo que o filtro seja
+ * executado apenas uma vez por requisição.</p>
+ */
+@Component
+public class JwtFilter extends OncePerRequestFilter {
+
+    private final JwtUtil jwtUtil;
+    private final UserDetailsService userDetailsService;
+
+    public JwtFilter(JwtUtil jwtUtil, UserDetailsService userDetailsService) {
+        this.jwtUtil = jwtUtil;
+        this.userDetailsService = userDetailsService;
+    }
+
+    /**
+     * Método principal do filtro, executado a cada requisição HTTP.
+     * 
+     * <p>Fluxo:</p>
+     * <ol>
+     *   <li>Verifica se existe um token no cabeçalho Authorization</li>
+     *   <li>Extrai o email do token</li>
+     *   <li>Valida o token</li>
+     *   <li>Autentica o usuário no contexto do Spring Security</li>
+     * </ol>
+     * 
+     * @param request requisição HTTP
+     * @param response resposta HTTP
+     * @param chain cadeia de filtros
+     */
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain chain) 
+                                    throws ServletException, IOException {
+        
+        Cookie[] cookies = request.getCookies();
+        
+        if (cookies == null ) {
+            chain.doFilter( request, response);
+            return;
+        }
+        
+    	String token = Arrays.stream(cookies)
+        		.filter(c -> c.getName().equals("jwt"))
+        		.findFirst()
+        		.map(c -> c.getValue())
+        		.orElse(null);
+    	
+        if (token == null ) {
+            chain.doFilter( request, response);
+            return;
+        }
+        String email = jwtUtil.extrairEmail(token);
+        
+        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        	UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        	
+        	if (jwtUtil.validarToken(token, email)) {
+        		UsernamePasswordAuthenticationToken auth = 
+        				new UsernamePasswordAuthenticationToken(
+        						userDetails, null, userDetails.getAuthorities()
+        		);
+        	auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        	SecurityContextHolder.getContext().setAuthentication(auth);
+        	
+        	}
+        }
+        
+        chain.doFilter(request, response);
+
+    }
+    
+}
